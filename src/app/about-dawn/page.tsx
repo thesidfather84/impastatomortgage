@@ -9,7 +9,7 @@ import { brand } from "@/config/brand";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Dawn",
-  description: "About Dawn Impastato — nearly 30 years of Louisiana real estate experience.",
+  description: "About Dawn Impastato — decades of Louisiana real estate experience.",
   path: "/about-dawn",
 });
 
@@ -28,11 +28,13 @@ export default function AboutDawnPage() {
         </div>
 
         <div>
-          <InfoSection title="Nearly 30 years of real estate experience">
+          <InfoSection title="More than a mortgage perspective">
             <p>
-              Before helping people with mortgages, Dawn spent decades in
-              Louisiana real estate — in living rooms, at walk-throughs, and
-              at closing tables. That experience shapes how she talks about
+              Dawn isn&apos;t simply a mortgage originator — she&apos;s also
+              a Louisiana Associate Broker with real estate roots that go
+              back decades. When you&apos;ve spent that long around
+              Louisiana real estate, you learn the mortgage is only one
+              piece of the story. That experience shapes how she talks about
               financing: in plain English, grounded in how families actually
               make housing decisions.
             </p>

@@ -4,23 +4,42 @@ import { compliance } from "@/config/compliance";
 import { LicensingDisclosure } from "@/components/compliance/LicensingDisclosure";
 
 describe("compliance config", () => {
-  it("has not been filled in with a fabricated NMLS ID", () => {
-    expect(compliance.dawnNmlsId.status).toBe("todo");
-    expect(compliance.dawnNmlsId.value).toBeNull();
-    expect(compliance.companyNmlsId.status).toBe("todo");
-    expect(compliance.companyNmlsId.value).toBeNull();
+  it("has the verified mortgage NMLS data confirmed, not fabricated", () => {
+    expect(compliance.mortgage.loanOriginatorNmlsId).toEqual({
+      status: "confirmed",
+      value: "2354629",
+    });
+    expect(compliance.mortgage.companyNmlsId).toEqual({
+      status: "confirmed",
+      value: "2342251",
+    });
+    expect(compliance.mortgage.currentCompanyLegalName.value).toBe("Argent Lending LLC");
+  });
+
+  it("has the verified Louisiana real estate license confirmed", () => {
+    expect(compliance.realEstate.licenseNumber).toEqual({
+      status: "confirmed",
+      value: "BROK.73582-ASA",
+    });
+    expect(compliance.realEstate.firstIssueDate.value).toBe("2005-07-01");
+  });
+
+  it("still leaves unverified fields as pending rather than guessing", () => {
+    expect(compliance.mortgage.officeAddress.status).toBe("todo");
+    expect(compliance.mortgage.licensingStates.status).toBe("todo");
   });
 });
 
 describe("LicensingDisclosure", () => {
-  it("renders a visible pending notice instead of a fake NMLS ID", () => {
+  it("renders the real, verified NMLS IDs", () => {
     render(<LicensingDisclosure />);
+    expect(screen.getByText(/2354629/)).toBeInTheDocument();
+    expect(screen.getByText(/2342251/)).toBeInTheDocument();
+    expect(screen.getByText(/BROK\.73582-ASA/)).toBeInTheDocument();
+  });
 
-    // No numeric-looking NMLS ID should ever render as if it were real.
-    const nmlsIdPattern = /NMLS ID:\s*\d/i;
-    expect(screen.queryByText(nmlsIdPattern)).not.toBeInTheDocument();
-
-    // Every missing field should surface as a visible "Pending" notice.
+  it("still shows a pending notice for fields that remain unconfirmed", () => {
+    render(<LicensingDisclosure />);
     const pendingNotices = screen.getAllByText(/Pending:/i);
     expect(pendingNotices.length).toBeGreaterThan(0);
   });

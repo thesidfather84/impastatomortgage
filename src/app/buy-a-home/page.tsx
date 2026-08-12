@@ -18,7 +18,7 @@ export default function BuyAHomePage() {
       <PageHeader
         eyebrow="Buying a Home"
         title="Your first home, or your next one."
-        intro="Buying a home is one of the biggest decisions you'll make — and one of the most personal. Dawn brings nearly 30 years of real estate experience to the financing side of that decision, so you're not learning it alone."
+        intro="Buying a home is one of the biggest decisions you'll make — and one of the most personal. Dawn brings decades of real estate experience to the financing side of that decision, so you're not learning it alone."
       />
 
       <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">

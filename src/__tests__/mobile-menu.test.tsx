@@ -17,7 +17,7 @@ describe("MobileMenu", () => {
 
     const dialog = screen.getByRole("dialog", { name: /site menu/i });
     expect(dialog).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Buy a Home" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Buy" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Ask Dawn" })).toBeInTheDocument();
   });
 

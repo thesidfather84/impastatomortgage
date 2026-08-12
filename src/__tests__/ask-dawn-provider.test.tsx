@@ -2,21 +2,23 @@ import { describe, expect, it, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { AskDawnProvider, useAskDawn } from "@/components/ask-dawn/AskDawnProvider";
+import { knowledgeBase } from "@/content/ask-dawn/knowledge-base";
 
 function TestHarness() {
-  const { messages, askQuestion, italianMode, setItalianMode } = useAskDawn();
+  const { messages, askQuestion } = useAskDawn();
   return (
     <div>
       <button onClick={() => askQuestion("What is a reverse mortgage?")}>
         Ask approved question
       </button>
+      <button onClick={() => askQuestion("What's FHA?")}>Ask jargon question</button>
       <button onClick={() => askQuestion("asdkfj random gibberish xyz")}>
         Ask unknown question
       </button>
-      <button onClick={() => setItalianMode(!italianMode)}>Toggle Italian Mode</button>
       <ul>
         {messages.map((m) => (
           <li key={m.id} data-role={m.role} data-kind={"kind" in m ? m.kind : undefined}>
+            {"intro" in m && <p>{m.intro}</p>}
             {m.text}
           </li>
         ))}
@@ -30,7 +32,7 @@ beforeEach(() => {
 });
 
 describe("AskDawnProvider", () => {
-  it("answers a known approved question from the knowledge base", async () => {
+  it("answers a known approved question with the exact knowledge-base text", async () => {
     const user = userEvent.setup();
     render(
       <AskDawnProvider>
@@ -40,9 +42,8 @@ describe("AskDawnProvider", () => {
 
     await user.click(screen.getByText("Ask approved question"));
 
-    expect(
-      screen.getByText(/A reverse mortgage is a loan for homeowners/i)
-    ).toBeInTheDocument();
+    const expected = knowledgeBase.find((k) => k.id === "what-is-reverse-mortgage")!;
+    expect(screen.getByText(expected.approvedAnswer)).toBeInTheDocument();
   });
 
   it("escalates to Dawn when there is no approved answer", async () => {
@@ -56,13 +57,11 @@ describe("AskDawnProvider", () => {
     await user.click(screen.getByText("Ask unknown question"));
 
     expect(
-      screen.getByText(
-        "I don't want to guess about something this important. Let's get Dawn involved."
-      )
+      screen.getByText("Fuggedaboutit — I'm not guessing when your home is involved. Let's get the real Dawn.")
     ).toBeInTheDocument();
   });
 
-  it("does not change the factual approved answer when Italian Mode is on", async () => {
+  it("the personality intro never replaces or alters the factual answer text", async () => {
     const user = userEvent.setup();
     render(
       <AskDawnProvider>
@@ -70,28 +69,23 @@ describe("AskDawnProvider", () => {
       </AskDawnProvider>
     );
 
-    await user.click(screen.getByText("Toggle Italian Mode"));
-    await user.click(screen.getByText("Ask approved question"));
+    await user.click(screen.getByText("Ask jargon question"));
 
-    // The factual answer text must be identical regardless of personality mode.
+    const expected = knowledgeBase.find((k) => k.id === "what-is-fha")!;
+    // The exact approved answer is present, unmodified.
+    expect(screen.getByText(expected.approvedAnswer)).toBeInTheDocument();
+    // A personality intro line is shown as a distinct, separate line.
     expect(
-      screen.getByText(/A reverse mortgage is a loan for homeowners/i)
+      screen.getByText(/alphabet soup/i)
     ).toBeInTheDocument();
   });
 
-  it("changes the escalation phrasing (not the facts) when Italian Mode is on", async () => {
-    const user = userEvent.setup();
+  it("has no Italian Mode toggle — the personality is always on", () => {
     render(
       <AskDawnProvider>
         <TestHarness />
       </AskDawnProvider>
     );
-
-    await user.click(screen.getByText("Toggle Italian Mode"));
-    await user.click(screen.getByText("Ask unknown question"));
-
-    expect(
-      screen.getByText("Fuggedaboutit — I'm not guessing on that one. Let's ask Dawn.")
-    ).toBeInTheDocument();
+    expect(screen.queryByText(/italian mode/i)).not.toBeInTheDocument();
   });
 });

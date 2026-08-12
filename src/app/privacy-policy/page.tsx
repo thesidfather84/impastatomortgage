@@ -24,9 +24,8 @@ export default function PrivacyPolicyPage() {
         <InfoSection title="What this site currently does">
           <ul className="list-disc space-y-2 pl-5">
             <li>
-              Your text-size preference and Italian Mode preference are saved
-              only in your browser (localStorage) — they are never sent to a
-              server.
+              Your text-size preference is saved only in your browser
+              (localStorage) — it is never sent to a server.
             </li>
             <li>
               Ask Dawn conversations happen entirely in your browser using a

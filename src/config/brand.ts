@@ -3,6 +3,16 @@
  * without hunting through components. Swap values here, not in JSX.
  */
 
+/**
+ * The single configurable "years of experience" figure used in marketing
+ * copy. Kept conservative and derived from the verified Louisiana
+ * real-estate license first-issue date (2005-07-01, see
+ * src/config/compliance.ts) — this is NOT a claim about how long Dawn has
+ * held a mortgage license. Update this one value (and the sentences that
+ * use it) once Dawn confirms a fuller career history.
+ */
+const EXPERIENCE_YEARS_BADGE = "20+";
+
 export const brand = {
   siteName: "Impastato Mortgage",
   ownerName: "Dawn Impastato",
@@ -12,16 +22,17 @@ export const brand = {
   tagline: "Every Chapter. Every Home. One Trusted Guide.",
 
   /** Alternate tagline, available for secondary placements/testing. */
-  taglineAlternate: "Louisiana Roots. Home Financing for Every Generation.",
+  taglineAlternate: "Louisiana Roots. Italian Heritage. A Better Way Home.",
 
   /** Short description of Dawn's differentiator. */
   positioningStatement:
-    "Nearly 30 years understanding homes, real estate, families, and financing — before Dawn ever helped anyone with a mortgage.",
+    "Decades understanding homes, real estate, families, and financing — before Dawn ever helped anyone with a mortgage.",
 
-  experienceHeadline: "30 Years of Real Estate Experience",
+  experienceYearsBadge: EXPERIENCE_YEARS_BADGE,
+  experienceHeadline: `${EXPERIENCE_YEARS_BADGE} Years of Louisiana Real Estate Experience`,
 
   heroSupportingCopy:
-    "Whether you're buying a first home, refinancing, using equity, moving across the lake, helping your parents, downsizing, or simply learning about a reverse mortgage — Dawn helps you understand your options in plain English.",
+    "From first homes to reverse mortgages, Dawn brings decades of Louisiana real estate experience to every conversation about financing.",
 
   primaryMarket: {
     region: "Louisiana",

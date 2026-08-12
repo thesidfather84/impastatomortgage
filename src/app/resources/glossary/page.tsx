@@ -20,13 +20,13 @@ export default function GlossaryPage() {
     <>
       <PageHeader
         eyebrow="Resources"
-        title="Glossary"
-        intro="The same plain-English answers Ask Dawn uses — no jargon-first definitions."
+        title="APR. PMI. FHA. HECM. Enough alphabet soup."
+        intro="Here's the same plain-English translation Ask Dawn uses — no jargon-first definitions."
       />
 
       <div className="mx-auto max-w-3xl space-y-6 px-4 py-10 sm:px-6 lg:px-8">
         {approvedTerms.map((term) => (
-          <div key={term.id} className="border-b border-cypress-100 pb-6">
+          <div key={term.id} className="border-b border-brass-400/20 pb-6">
             <p className="text-xs font-semibold uppercase tracking-wide text-brass-600">
               {term.topic}
             </p>

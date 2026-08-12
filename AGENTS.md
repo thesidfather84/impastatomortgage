@@ -66,10 +66,15 @@ reported by `Get-ChildItem` before running `next build`/`next dev`.
   `src/config/contact.ts`. Never add a contact form or scheduler that
   doesn't have a real backend — see `unconfiguredFeatures` in that file
   for the pattern of honestly labeling not-yet-available features.
-- Ask Dawn's "Italian Mode" personality layer
-  (`src/content/ask-dawn/personality.ts`) may only affect greetings,
-  transitions, success messages, and escalation hand-offs — never the
-  actual knowledge-base answer text.
+- Ask Dawn's personality layer (`src/content/ask-dawn/personality.ts`) is
+  always on — there is no toggle — and may only affect greetings, answer
+  intros, and escalation hand-offs, via a separate `intro` field. It must
+  never modify `approvedAnswer` text from the knowledge base.
+- Regulated identity facts (NMLS IDs, real-estate license) live in
+  `src/config/compliance.ts` under `compliance.mortgage` and
+  `compliance.realEstate`. Impastato Mortgage is Dawn's personal brand,
+  not itself a licensed lender/broker — she currently originates through
+  Argent Lending LLC. Never state otherwise; see `/licensing-disclosures`.
 
 ## Commands
 

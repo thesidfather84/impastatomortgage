@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useAskDawn } from "./AskDawnProvider";
 import { AskDawnMessageBubble } from "./AskDawnMessageBubble";
-import { ItalianModeToggle } from "./ItalianModeToggle";
 import { VoiceInputButton } from "./VoiceInputButton";
-import { standardPhrases, italianModePhrases } from "@/content/ask-dawn/personality";
+import { DawnMonogram } from "./DawnMonogram";
+import { greeting } from "@/content/ask-dawn/personality";
 
 const EXAMPLE_QUESTIONS = [
   "What is a reverse mortgage?",
@@ -18,10 +18,9 @@ const EXAMPLE_QUESTIONS = [
 ];
 
 export function AskDawnInline() {
-  const { messages, askQuestion, italianMode } = useAskDawn();
+  const { messages, askQuestion } = useAskDawn();
   const [input, setInput] = useState("");
   const listRef = useRef<HTMLDivElement>(null);
-  const greeting = italianMode ? italianModePhrases.greeting : standardPhrases.greeting;
 
   useEffect(() => {
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
@@ -35,18 +34,20 @@ export function AskDawnInline() {
   }
 
   return (
-    <div className="mx-auto flex max-w-2xl flex-col overflow-hidden rounded-2xl border border-cypress-100 bg-white shadow-sm">
-      <div className="flex items-center justify-between border-b border-cypress-100 bg-cypress-700 px-5 py-4">
+    <div className="mx-auto flex max-w-2xl flex-col overflow-hidden rounded-2xl border border-brass-400/40 bg-white shadow-sm">
+      <div className="flex items-center gap-3 border-b border-brass-400/30 bg-tomato-900 px-5 py-4">
+        <DawnMonogram className="h-10 w-10 text-base" />
         <div>
           <p className="font-display text-lg font-semibold text-ivory">Ask Dawn</p>
-          <p className="text-xs text-ivory/70">Plain-English mortgage answers</p>
+          <p className="text-xs italic text-ivory/60">
+            Mortgages don&apos;t have to sound like alphabet soup.
+          </p>
         </div>
-        <ItalianModeToggle />
       </div>
 
       <div ref={listRef} className="max-h-[50vh] min-h-[280px] space-y-4 overflow-y-auto px-5 py-5">
         {messages.length === 0 && (
-          <p className="text-sm text-cypress-700">{greeting}</p>
+          <p className="text-sm italic text-cypress-700">{greeting}</p>
         )}
         {messages.map((message) => (
           <AskDawnMessageBubble key={message.id} message={message} />
@@ -76,7 +77,7 @@ export function AskDawnInline() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Type your question…"
+          placeholder="What do you want to know?"
           className="min-h-[44px] flex-1 rounded-md border border-cypress-100 px-3 text-base text-charcoal-900 placeholder:text-cypress-400 focus-visible:outline-brass-500"
         />
         <button

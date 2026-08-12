@@ -8,7 +8,7 @@ export function InfoSection({
   children: ReactNode;
 }) {
   return (
-    <section className="border-b border-cypress-100 py-4">
+    <section className="border-b border-brass-400/20 py-6">
       <h2 className="font-display text-xl font-semibold text-cypress-900 sm:text-2xl">
         {title}
       </h2>

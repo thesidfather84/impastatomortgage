@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { PageHeader } from "@/components/site/PageHeader";
+import { EditorialLinkList } from "@/components/site/EditorialLinkList";
 import { pageMetadata } from "@/config/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -41,17 +41,8 @@ export default function ResourcesPage() {
         intro="No jargon-first explanations here. Start wherever makes sense."
       />
 
-      <div className="mx-auto grid max-w-4xl gap-4 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:px-8">
-        {resourceLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="rounded-xl border border-cypress-100 bg-white p-6 transition-colors hover:border-brass-400"
-          >
-            <p className="font-display text-xl font-semibold text-cypress-900">{link.title}</p>
-            <p className="mt-1 text-cypress-700">{link.description}</p>
-          </Link>
-        ))}
+      <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+        <EditorialLinkList items={resourceLinks} />
       </div>
     </>
   );

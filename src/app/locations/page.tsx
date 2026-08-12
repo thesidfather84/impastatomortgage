@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { locations } from "@/content/locations/locations";
 import { PageHeader } from "@/components/site/PageHeader";
+import { EditorialLinkList } from "@/components/site/EditorialLinkList";
 import { pageMetadata } from "@/config/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -11,6 +11,13 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default function LocationsIndexPage() {
+  const items = locations.map((location) => ({
+    href: `/locations/${location.slug}`,
+    title: location.name,
+    description: location.blurb,
+    eyebrow: location.region,
+  }));
+
   return (
     <>
       <PageHeader
@@ -19,22 +26,8 @@ export default function LocationsIndexPage() {
         intro="From New Orleans to the Northshore and Southshore, here's a closer look at the communities Dawn works with."
       />
 
-      <div className="mx-auto grid max-w-4xl gap-4 px-4 py-10 sm:grid-cols-2 sm:px-6 lg:px-8">
-        {locations.map((location) => (
-          <Link
-            key={location.slug}
-            href={`/locations/${location.slug}`}
-            className="rounded-xl border border-cypress-100 bg-white p-6 transition-colors hover:border-brass-400"
-          >
-            <p className="text-xs font-semibold uppercase tracking-wide text-brass-600">
-              {location.region}
-            </p>
-            <p className="mt-1 font-display text-xl font-semibold text-cypress-900">
-              {location.name}
-            </p>
-            <p className="mt-1 text-cypress-700">{location.blurb}</p>
-          </Link>
-        ))}
+      <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+        <EditorialLinkList items={items} />
       </div>
     </>
   );

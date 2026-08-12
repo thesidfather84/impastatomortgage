@@ -1,65 +1,57 @@
 /**
- * "What can Dawn help you do?" homepage tap targets, in plain English —
- * no jargon (HECM, DTI, LTV, ARM) at this layer.
+ * "How can Dawn help?" homepage editorial tiles, in plain English — no
+ * jargon (HECM, DTI, LTV, ARM) at this layer.
  */
 
 export type Pathway = {
   id: string;
   title: string;
-  subtitle: string;
+  line: string;
   href: string;
-  icon: "home" | "arrow-down" | "sunset" | "move" | "family" | "compass" | "bridge";
+  icon: "home" | "bridge" | "arrow-down" | "sunset" | "family" | "compass";
 };
 
 export const pathways: Pathway[] = [
   {
     id: "buy",
-    title: "Buy a Home",
-    subtitle: "First home or next home",
+    title: "Buy My First Home",
+    line: "Let's get you the keys.",
     href: "/buy-a-home",
     icon: "home",
   },
   {
+    id: "across-the-lake",
+    title: "Move Across the Lake",
+    line: "Northshore or Southshore — let's make the move work.",
+    href: "/locations/northshore",
+    icon: "bridge",
+  },
+  {
     id: "lower-payment",
     title: "Lower My Payment",
-    subtitle: "Explore refinance options",
+    line: "See whether refinancing makes sense.",
     href: "/refinance",
     icon: "arrow-down",
   },
   {
     id: "retirement",
     title: "Use My Home for Retirement",
-    subtitle: "Learn about reverse mortgages",
+    line: "Understand your reverse-mortgage options.",
     href: "/reverse-mortgage",
     icon: "sunset",
   },
   {
-    id: "next-home",
-    title: "Buy My Next Home",
-    subtitle: "Move up, relocate, or downsize",
-    href: "/buy-a-home",
-    icon: "move",
-  },
-  {
     id: "help-parents",
-    title: "Help My Parents",
-    subtitle: "Information for adult children and family",
+    title: "Help Mom or Dad",
+    line: "Straight answers for the whole family.",
     href: "/family/helping-mom-or-dad",
     icon: "family",
   },
   {
     id: "not-sure",
     title: "I'm Not Sure",
-    subtitle: "Let Dawn help identify the next step",
+    line: "That's exactly what Ask Dawn is for.",
     href: "/mortgage-compass",
     icon: "compass",
   },
 ];
-
-export const acrossTheLakePathway: Pathway = {
-  id: "across-the-lake",
-  title: "Moving Across the Lake",
-  subtitle: "Northshore and Southshore relocation basics",
-  href: "/locations/northshore",
-  icon: "bridge",
-};

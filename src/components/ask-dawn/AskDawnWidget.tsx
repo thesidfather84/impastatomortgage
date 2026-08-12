@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useAskDawn } from "./AskDawnProvider";
 import { AskDawnPanel } from "./AskDawnPanel";
+import { DawnMonogram } from "./DawnMonogram";
 
 export function AskDawnWidget() {
   const { isOpen, toggleOpen, close } = useAskDawn();
@@ -25,17 +26,12 @@ export function AskDawnWidget() {
         onClick={toggleOpen}
         aria-expanded={isOpen}
         aria-haspopup="dialog"
-        className="fixed bottom-5 right-5 z-40 flex min-h-[56px] items-center gap-2 rounded-full bg-cypress-700 px-5 py-3 font-display text-base font-semibold text-ivory shadow-lg transition-transform hover:scale-105 hover:bg-cypress-600 sm:bottom-6 sm:right-6"
+        className="fixed bottom-5 right-5 z-40 flex min-h-[56px] items-center gap-2.5 rounded-full border border-brass-400/70 bg-tomato-900 py-2 pl-2 pr-5 shadow-lg transition-transform hover:scale-105 sm:bottom-6 sm:right-6"
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path
-            d="M4 4h16v11H8l-4 4V4Z"
-            stroke="currentColor"
-            strokeWidth="1.7"
-            strokeLinejoin="round"
-          />
-        </svg>
-        {isOpen ? "Close" : "Ask Dawn"}
+        <DawnMonogram />
+        <span className="font-display text-base font-semibold text-ivory">
+          {isOpen ? "Close" : "Ask Dawn"}
+        </span>
       </button>
 
       {isOpen && <AskDawnPanel />}

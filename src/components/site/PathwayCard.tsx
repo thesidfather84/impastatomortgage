@@ -3,26 +3,39 @@ import type { Pathway } from "@/config/pathways";
 import { PathwayIcon } from "./PathwayIcon";
 import { cn } from "@/lib/cn";
 
-export function PathwayCard({ pathway, accent = false }: { pathway: Pathway; accent?: boolean }) {
+const TONES = [
+  "bg-tomato-800",
+  "bg-cypress-800",
+  "bg-burgundy-800",
+  "bg-tomato-700",
+  "bg-cypress-900",
+  "bg-burgundy-600",
+];
+
+export function PathwayCard({ pathway, index }: { pathway: Pathway; index: number }) {
   return (
     <Link
       href={pathway.href}
       className={cn(
-        "group flex min-h-[120px] flex-col justify-between rounded-xl border p-5 transition-all hover:-translate-y-0.5 hover:shadow-md",
-        accent
-          ? "border-brass-400 bg-brass-100/40 hover:bg-brass-100/70"
-          : "border-cypress-100 bg-white hover:border-brass-400"
+        "group relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-sm p-7 text-ivory transition-transform hover:-translate-y-1",
+        TONES[index % TONES.length]
       )}
     >
-      <PathwayIcon
-        icon={pathway.icon}
-        className={cn("h-8 w-8", accent ? "text-brass-600" : "text-cypress-600")}
-      />
-      <div className="mt-4">
-        <p className="font-display text-lg font-semibold text-cypress-900 group-hover:text-brass-600">
-          {pathway.title}
-        </p>
-        <p className="text-sm text-cypress-700">{pathway.subtitle}</p>
+      <span className="absolute right-5 top-5 font-display text-4xl font-semibold text-white/10">
+        0{index + 1}
+      </span>
+
+      <PathwayIcon icon={pathway.icon} className="h-8 w-8 text-brass-300" />
+
+      <div className="mt-6">
+        <p className="font-display text-2xl font-semibold leading-snug">{pathway.title}</p>
+        <p className="mt-2 text-sm italic text-ivory/70">{pathway.line}</p>
+        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brass-300 opacity-0 transition-opacity group-hover:opacity-100">
+          Explore
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
       </div>
     </Link>
   );
