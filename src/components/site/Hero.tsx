@@ -8,14 +8,14 @@ const HERO_IMAGE_SRC = "/images/impastato-new-orleans-hero.png";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[560px] items-center overflow-hidden text-ivory lg:min-h-[720px]">
+    <section className="relative isolate flex min-h-[560px] items-center overflow-hidden text-ivory sm:min-h-[620px] md:min-h-[680px] lg:min-h-[780px] xl:min-h-[860px] 2xl:min-h-[940px]">
       <Image
         src={HERO_IMAGE_SRC}
-        alt="A New Orleans street at dusk — live oak and Spanish moss framing a lamplit view of St. Louis Cathedral and a wrought-iron balcony."
+        alt="A New Orleans street at dusk — live oak and Spanish moss framing a lamplit view of St. Louis Cathedral, wrought-iron balconies, gas lamps, and the wet reflective street below."
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[62%_45%] sm:object-[58%_45%] lg:object-[50%_42%]"
+        className="object-cover object-[68%_62%] sm:object-[60%_60%] lg:object-[52%_58%] xl:object-[50%_56%]"
       />
 
       {/* Dark gradient concentrated on the left for text legibility — the
@@ -24,8 +24,8 @@ export function Hero() {
         className="absolute inset-0"
         style={{
           backgroundImage: [
-            "linear-gradient(90deg, rgba(23,14,10,0.92) 0%, rgba(23,14,10,0.72) 32%, rgba(23,14,10,0.28) 58%, rgba(23,14,10,0.05) 78%)",
-            "linear-gradient(0deg, rgba(23,14,10,0.55) 0%, rgba(23,14,10,0) 30%)",
+            "linear-gradient(90deg, rgba(23,14,10,0.92) 0%, rgba(23,14,10,0.60) 32%, rgba(23,14,10,0.16) 58%, rgba(23,14,10,0.02) 78%)",
+            "linear-gradient(0deg, rgba(23,14,10,0.45) 0%, rgba(23,14,10,0) 30%)",
           ].join(", "),
         }}
         aria-hidden="true"
@@ -40,7 +40,7 @@ export function Hero() {
           Italian Heritage.
         </p>
 
-        <h1 className="max-w-2xl font-display text-[2.5rem] font-semibold leading-[1.1] sm:text-5xl lg:text-[3.3rem]">
+        <h1 className="max-w-2xl font-display text-[2.25rem] font-semibold leading-[1.1] sm:text-[2.5rem] md:text-5xl lg:text-[3.3rem]">
           Every Chapter.
           <br />
           Every Home.

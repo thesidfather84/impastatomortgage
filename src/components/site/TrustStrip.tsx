@@ -21,7 +21,7 @@ function ValueIcon({ type, className }: { type: string; className?: string }) {
 
 const values = [
   { icon: "lamp", title: "Local Knowledge", line: "Louisiana neighborhoods. Real guidance." },
-  { icon: "fleur", title: "Italian Values", line: "Family. Honesty. Hard work." },
+  { icon: "fleur", title: "Italian Heritage", line: "Family. Honesty. Hard work." },
   { icon: "balcony", title: "New Orleans Spirit", line: "Resilience. Community. A better way home." },
   { icon: "trumpet", title: "Here For You", line: "Clear answers. Personal service." },
 ];
@@ -30,24 +30,27 @@ export function TrustStrip() {
   const nmls = compliance.mortgage.loanOriginatorNmlsId;
 
   return (
-    <section className="bg-burgundy-800 py-8 text-ivory">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-        <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:text-left">
-          <HeritageSeal className="h-24 w-24 shrink-0 border-brass-300/60" />
+    <section className="bg-burgundy-800 py-12 text-ivory sm:py-14 lg:py-16">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:px-8">
+        <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
+          <HeritageSeal className="h-28 w-28 shrink-0 border-brass-300/60" />
           <div>
-            <p className="font-display text-lg italic text-brass-100">{brand.ownerName}</p>
+            <p className="font-display text-xl italic text-brass-100">{brand.ownerName}</p>
             {nmls.status === "confirmed" && (
-              <p className="text-xs uppercase tracking-[0.14em] text-ivory/55">NMLS #{nmls.value}</p>
+              <p className="mt-0.5 text-xs uppercase tracking-[0.14em] text-ivory/55">NMLS #{nmls.value}</p>
             )}
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4 lg:items-center">
           {values.map((v) => (
-            <div key={v.title} className="flex flex-col items-center gap-1.5 text-center sm:items-start sm:text-left">
-              <ValueIcon type={v.icon} className="h-6 w-6 text-brass-300" />
+            <div
+              key={v.title}
+              className="flex flex-col items-center gap-2 text-center sm:items-start sm:text-left"
+            >
+              <ValueIcon type={v.icon} className="h-7 w-7 text-brass-300" />
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-brass-200">{v.title}</p>
-              <p className="max-w-[10rem] text-xs text-ivory/70">{v.line}</p>
+              <p className="max-w-[11rem] text-sm text-ivory/75">{v.line}</p>
             </div>
           ))}
         </div>

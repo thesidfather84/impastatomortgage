@@ -33,15 +33,15 @@ export function Logo({ className }: { className?: string }) {
     <Link
       href="/"
       onClick={handleClick}
-      className={`flex items-center gap-2.5 ${className ?? ""}`}
+      className={`flex items-center gap-3 ${className ?? ""}`}
       aria-label={`${brand.siteName} — home`}
     >
-      <IMMonogram className="h-9 w-9 text-sm" />
-      <span>
-        <span className="font-display text-xl font-semibold tracking-tight text-cypress-900">
+      <IMMonogram className="h-10 w-10 shrink-0 text-sm sm:h-11 sm:w-11" />
+      <span className="whitespace-nowrap">
+        <span className="font-display text-xl font-semibold tracking-tight text-cypress-900 sm:text-2xl">
           Impastato
         </span>
-        <span className="ml-1.5 font-display text-xl font-medium tracking-tight text-brass-600">
+        <span className="ml-1.5 font-display text-xl font-medium tracking-tight text-brass-600 sm:text-2xl">
           Mortgage
         </span>
       </span>

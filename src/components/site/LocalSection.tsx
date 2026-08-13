@@ -10,28 +10,28 @@ export function LocalSection() {
     .filter((l): l is NonNullable<typeof l> => Boolean(l));
 
   return (
-    <section className="relative overflow-hidden bg-ivory-deep py-20 lg:py-24">
+    <section className="relative overflow-hidden bg-ivory-deep py-24 lg:py-28">
       <LakeRipple className="pointer-events-none absolute inset-x-0 top-0 h-16 w-full text-lake-500/25" />
 
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-burgundy-600">
+        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-burgundy-600">
           Rooted here
         </p>
-        <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-semibold text-cypress-900 sm:text-4xl">
+        <h2 className="mx-auto mt-4 max-w-2xl font-display text-4xl font-semibold text-cypress-900 sm:text-5xl">
           New Orleans. The Northshore. The Southshore. St. Tammany. Louisiana.
         </h2>
-        <p className="mx-auto mt-4 max-w-xl text-lg text-cypress-700">
+        <p className="mx-auto mt-5 max-w-xl text-xl text-cypress-700">
           This isn&apos;t a national call center pretending to understand
           Louisiana. Dawn knows this region — the neighborhoods, the pace,
           and the character on both sides of Lake Pontchartrain.
         </p>
 
-        <div className="mx-auto mt-10 flex max-w-3xl flex-wrap items-center justify-center gap-x-2 gap-y-3">
+        <div className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-x-3 gap-y-5">
           {featuredLocations.map((location, i) => (
-            <span key={location.slug} className="flex items-center gap-2">
+            <span key={location.slug} className="flex items-center gap-3">
               <Link
                 href={`/locations/${location.slug}`}
-                className="font-display text-lg font-medium text-cypress-800 underline decoration-brass-400/50 decoration-2 underline-offset-4 hover:text-burgundy-600"
+                className="inline-block min-h-[44px] py-2 font-display text-xl font-medium text-cypress-800 underline decoration-brass-400/50 decoration-2 underline-offset-4 hover:text-burgundy-600"
               >
                 {location.name}
               </Link>
@@ -46,7 +46,7 @@ export function LocalSection() {
 
         <Link
           href="/locations"
-          className="mt-8 inline-block text-sm font-semibold text-cypress-700 underline underline-offset-4 hover:text-burgundy-600"
+          className="mt-8 inline-block text-base font-semibold text-cypress-700 underline underline-offset-4 hover:text-burgundy-600"
         >
           See all areas we serve →
         </Link>

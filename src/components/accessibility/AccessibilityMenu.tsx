@@ -47,21 +47,23 @@ export function AccessibilityMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className="flex items-center gap-2 rounded-md border border-brass-400/60 px-4 py-2 font-display text-base font-semibold text-cypress-900 hover:bg-brass-100/40"
+        className="flex min-h-[44px] flex-col items-center justify-center rounded-md border border-brass-400/60 px-3 py-1.5 leading-tight text-cypress-900 hover:bg-brass-100/40"
       >
-        <span aria-hidden="true" className="font-semibold">
+        <span aria-hidden="true" className="font-display text-base font-semibold">
           Aa
         </span>
-        Accessibility
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-          <path
-            d="M2.5 4.5 6 8l3.5-3.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <span className="flex items-center gap-1 text-[0.65rem] font-medium uppercase tracking-wide whitespace-nowrap">
+          Accessibility
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path
+              d="M2.5 4.5 6 8l3.5-3.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
       </button>
 
       {open && (

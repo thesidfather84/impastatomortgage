@@ -7,7 +7,7 @@ export function EqualHousingDisclosure({ className }: { className?: string }) {
 
   return (
     <div className={className}>
-      <p className="flex items-center gap-2 text-sm text-cypress-700">
+      <p className="flex items-center gap-2 text-base text-cypress-700">
         <span aria-hidden="true" className="text-lg">
           ⌂
         </span>
