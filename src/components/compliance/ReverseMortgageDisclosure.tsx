@@ -8,8 +8,8 @@ export function ReverseMortgageDisclosure({ className }: { className?: string })
       <h3 className="mb-2 font-display text-base font-semibold uppercase tracking-wide text-cypress-700">
         Reverse Mortgage Disclosure
       </h3>
-      {field.status === "confirmed" && <p className="text-base text-cypress-700">{field.value}</p>}
-      <p className="mt-2 text-base leading-relaxed text-cypress-700">
+      {field.status === "confirmed" && <p className="text-lg text-cypress-700">{field.value}</p>}
+      <p className="mt-2 text-lg leading-relaxed text-cypress-700">
         A reverse mortgage is a loan that must be repaid, typically when the
         borrower sells the home, permanently moves out, or passes away.
         Borrowers remain responsible for property taxes, homeowners
