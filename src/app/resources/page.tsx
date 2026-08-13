@@ -11,6 +11,11 @@ export const metadata: Metadata = pageMetadata({
 
 const resourceLinks = [
   {
+    title: "Home Payment Explorer",
+    description: "See the real monthly picture — principal, interest, taxes, insurance, PMI, and HOA.",
+    href: "/calculators/home-payment",
+  },
+  {
     title: "Glossary",
     description: "Plain-English definitions for common mortgage terms.",
     href: "/resources/glossary",

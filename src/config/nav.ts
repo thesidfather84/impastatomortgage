@@ -14,6 +14,7 @@ export const primaryNav: NavItem[] = [
 
 /** Secondary destinations, tucked into the "Resources" dropdown on desktop. */
 export const resourcesNav: NavItem[] = [
+  { label: "Home Payment Explorer", href: "/calculators/home-payment", description: "See your real monthly picture" },
   { label: "Home Equity / Options", href: "/home-equity", description: "What your equity can do for you" },
   { label: "Dawn's Mortgage Compass", href: "/mortgage-compass", description: "Find your starting point" },
   { label: "Helping Mom or Dad", href: "/family/helping-mom-or-dad", description: "A guide for the whole family" },
