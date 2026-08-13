@@ -4,17 +4,18 @@ import { contact } from "@/config/contact";
 import { primaryNav, resourcesNav } from "@/config/nav";
 import { WroughtIronRail } from "@/components/site/motifs/WroughtIronRail";
 import { IMMonogram } from "@/components/site/motifs/IMMonogram";
+import { RooflineSkyline } from "@/components/site/motifs/RooflineSkyline";
 import { EqualHousingDisclosure } from "./EqualHousingDisclosure";
-import { LicensingDisclosure } from "./LicensingDisclosure";
-import { MortgageAdvertisingDisclosure } from "./MortgageAdvertisingDisclosure";
+import { PublicLicenseSummary } from "./PublicLicenseSummary";
 
 export function ComplianceFooter() {
   const year = new Date().getFullYear();
 
   return (
     <footer>
-      <div className="bg-cypress-900 text-ivory">
-        <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+      <div className="relative overflow-hidden bg-cypress-900 text-ivory">
+        <RooflineSkyline className="pointer-events-none absolute inset-x-0 bottom-0 h-16 w-full text-ivory/[0.04]" />
+        <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <p className="flex items-center gap-2.5 font-display text-xl font-semibold">
@@ -70,31 +71,6 @@ export function ComplianceFooter() {
                   </a>
                 </li>
               </ul>
-              <h3 className="mb-2 mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-brass-300">
-                Legal
-              </h3>
-              <ul className="space-y-2 text-sm text-ivory/80">
-                <li>
-                  <Link href="/privacy-policy" className="hover:text-brass-200">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/terms" className="hover:text-brass-200">
-                    Terms of Use
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/accessibility-statement" className="hover:text-brass-200">
-                    Accessibility Statement
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/licensing-disclosures" className="hover:text-brass-200">
-                    Licensing &amp; Disclosures
-                  </Link>
-                </li>
-              </ul>
             </div>
           </div>
 
@@ -103,25 +79,39 @@ export function ComplianceFooter() {
       </div>
 
       <div className="border-t border-cypress-100 bg-ivory-deep">
-        <div className="mx-auto max-w-6xl space-y-8 px-4 py-10 sm:px-6 lg:px-8">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-2">
-            <LicensingDisclosure />
-            <MortgageAdvertisingDisclosure />
+        <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+            <div className="space-y-3">
+              <PublicLicenseSummary className="space-y-1 text-sm text-cypress-700" />
+              <EqualHousingDisclosure />
+            </div>
+
+            <nav
+              aria-label="Legal"
+              className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-cypress-700 lg:justify-end"
+            >
+              <Link href="/licensing-disclosures" className="underline underline-offset-2 hover:text-burgundy-600">
+                Licensing &amp; Disclosures
+              </Link>
+              <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-burgundy-600">
+                Privacy
+              </Link>
+              <Link href="/terms" className="underline underline-offset-2 hover:text-burgundy-600">
+                Terms
+              </Link>
+              <Link href="/accessibility-statement" className="underline underline-offset-2 hover:text-burgundy-600">
+                Accessibility
+              </Link>
+            </nav>
           </div>
 
-          <EqualHousingDisclosure />
+          <p className="mt-5 max-w-2xl text-xs italic text-cypress-700/70">
+            General educational information only — not a loan approval, a
+            commitment to lend, or an offer of credit.
+          </p>
 
-          <Link
-            href="/licensing-disclosures"
-            className="inline-block text-sm font-semibold text-cypress-700 underline underline-offset-2 hover:text-brass-600"
-          >
-            Full licensing &amp; disclosures →
-          </Link>
-
-          <p className="text-xs text-cypress-700/80">
-            &copy; {year} {brand.siteName}. This site has not yet completed
-            formal legal/compliance review. Information is educational only
-            and is not a commitment to lend.
+          <p className="mt-3 text-xs text-cypress-700/60">
+            &copy; {year} {brand.siteName}
           </p>
         </div>
       </div>

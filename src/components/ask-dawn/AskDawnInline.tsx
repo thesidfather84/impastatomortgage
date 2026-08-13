@@ -35,7 +35,7 @@ export function AskDawnInline() {
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col overflow-hidden rounded-2xl border border-brass-400/40 bg-white shadow-sm">
-      <div className="flex items-center gap-3 border-b border-brass-400/30 bg-tomato-900 px-5 py-4">
+      <div className="flex items-center gap-3 border-b border-brass-400/30 bg-burgundy-800 px-5 py-4">
         <DawnMonogram className="h-10 w-10 text-base" />
         <div>
           <p className="font-display text-lg font-semibold text-ivory">Ask Dawn</p>

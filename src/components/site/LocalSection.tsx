@@ -14,7 +14,7 @@ export function LocalSection() {
       <LakeRipple className="pointer-events-none absolute inset-x-0 top-0 h-16 w-full text-lake-500/25" />
 
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-tomato-600">
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-burgundy-600">
           Rooted here
         </p>
         <h2 className="mx-auto mt-3 max-w-2xl font-display text-3xl font-semibold text-cypress-900 sm:text-4xl">
@@ -31,7 +31,7 @@ export function LocalSection() {
             <span key={location.slug} className="flex items-center gap-2">
               <Link
                 href={`/locations/${location.slug}`}
-                className="font-display text-lg font-medium text-cypress-800 underline decoration-brass-400/50 decoration-2 underline-offset-4 hover:text-tomato-600"
+                className="font-display text-lg font-medium text-cypress-800 underline decoration-brass-400/50 decoration-2 underline-offset-4 hover:text-burgundy-600"
               >
                 {location.name}
               </Link>
@@ -46,7 +46,7 @@ export function LocalSection() {
 
         <Link
           href="/locations"
-          className="mt-8 inline-block text-sm font-semibold text-cypress-700 underline underline-offset-4 hover:text-tomato-600"
+          className="mt-8 inline-block text-sm font-semibold text-cypress-700 underline underline-offset-4 hover:text-burgundy-600"
         >
           See all areas we serve →
         </Link>

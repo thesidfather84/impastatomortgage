@@ -1,63 +1,64 @@
 import { compliance } from "@/config/compliance";
-import { PendingNotice } from "./PendingNotice";
 
+function formatUsDate(iso: string): string {
+  const [y, m, d] = iso.split("-");
+  return `${m}/${d}/${y}`;
+}
+
+/**
+ * Clean, professional licensing block for the full /licensing-disclosures
+ * page. Only confirmed fields render — anything still unconfirmed is
+ * silently omitted, never shown as a "Pending" placeholder.
+ */
 export function LicensingDisclosure({ className }: { className?: string }) {
-  const mortgageFields = [
-    { label: "Loan originator", field: compliance.mortgage.loanOriginatorLegalName },
-    { label: "Loan originator NMLS ID", field: compliance.mortgage.loanOriginatorNmlsId },
-    { label: "Mortgage company", field: compliance.mortgage.currentCompanyLegalName },
-    { label: "Company NMLS ID", field: compliance.mortgage.companyNmlsId },
-    { label: "NMLS-listed location", field: compliance.mortgage.nmlsListedLocation },
-    { label: "Broker/lender status", field: compliance.mortgage.brokerOrLenderStatus },
-    { label: "Licensed states", field: compliance.mortgage.licensingStates },
-  ] as const;
+  const { mortgage, realEstate } = compliance;
 
-  const realEstateFields = [
-    { label: "Licensee", field: compliance.realEstate.licenseeLegalName },
-    { label: "License type", field: compliance.realEstate.licenseType },
-    { label: "License number", field: compliance.realEstate.licenseNumber },
-    { label: "License status", field: compliance.realEstate.licenseStatus },
-    { label: "First issued", field: compliance.realEstate.firstIssueDate },
-    { label: "Supervising brokerage", field: compliance.realEstate.supervisingBrokerage },
-  ] as const;
+  const mortgageLines = [
+    mortgage.loanOriginatorLegalName.status === "confirmed" ? mortgage.loanOriginatorLegalName.value : null,
+    mortgage.loanOriginatorNmlsId.status === "confirmed" ? `NMLS #${mortgage.loanOriginatorNmlsId.value}` : null,
+    mortgage.currentCompanyLegalName.status === "confirmed" ? mortgage.currentCompanyLegalName.value : null,
+    mortgage.companyNmlsId.status === "confirmed" ? `NMLS #${mortgage.companyNmlsId.value}` : null,
+    mortgage.nmlsListedLocation.status === "confirmed" ? mortgage.nmlsListedLocation.value : null,
+  ].filter((line): line is string => Boolean(line));
+
+  const realEstateLines = [
+    realEstate.licenseeLegalName.status === "confirmed" ? realEstate.licenseeLegalName.value : null,
+    realEstate.licenseType.status === "confirmed" ? `Louisiana ${realEstate.licenseType.value}` : null,
+    realEstate.licenseNumber.status === "confirmed" ? realEstate.licenseNumber.value : null,
+    realEstate.licenseStatus.status === "confirmed" ? realEstate.licenseStatus.value : null,
+    realEstate.firstIssueDate.status === "confirmed"
+      ? `First issued ${formatUsDate(realEstate.firstIssueDate.value)}`
+      : null,
+    realEstate.supervisingBrokerage.status === "confirmed" ? realEstate.supervisingBrokerage.value : null,
+  ].filter((line): line is string => Boolean(line));
 
   return (
     <div className={className}>
-      <h3 className="mb-2 font-display text-sm font-semibold uppercase tracking-wide text-cypress-700">
-        Mortgage Licensing
-      </h3>
-      <ul className="space-y-2">
-        {mortgageFields.map(({ label, field }) => (
-          <li key={label}>
-            {field.status === "confirmed" ? (
-              <p className="text-sm text-cypress-700">
-                <span className="font-semibold">{label}:</span>{" "}
-                {Array.isArray(field.value) ? field.value.join(", ") : field.value}
-              </p>
-            ) : (
-              <PendingNotice label={label} />
-            )}
-          </li>
-        ))}
-      </ul>
+      {mortgageLines.length > 0 && (
+        <div>
+          <h3 className="mb-2 font-display text-sm font-semibold uppercase tracking-wide text-cypress-700">
+            Mortgage
+          </h3>
+          <div className="space-y-0.5 text-sm text-cypress-700">
+            {mortgageLines.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
+        </div>
+      )}
 
-      <h3 className="mb-2 mt-5 font-display text-sm font-semibold uppercase tracking-wide text-cypress-700">
-        Louisiana Real Estate Licensing
-      </h3>
-      <ul className="space-y-2">
-        {realEstateFields.map(({ label, field }) => (
-          <li key={label}>
-            {field.status === "confirmed" ? (
-              <p className="text-sm text-cypress-700">
-                <span className="font-semibold">{label}:</span>{" "}
-                {Array.isArray(field.value) ? field.value.join(", ") : field.value}
-              </p>
-            ) : (
-              <PendingNotice label={label} />
-            )}
-          </li>
-        ))}
-      </ul>
+      {realEstateLines.length > 0 && (
+        <div className="mt-6">
+          <h3 className="mb-2 font-display text-sm font-semibold uppercase tracking-wide text-cypress-700">
+            Real Estate
+          </h3>
+          <div className="space-y-0.5 text-sm text-cypress-700">
+            {realEstateLines.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

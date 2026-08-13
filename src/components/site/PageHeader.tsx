@@ -13,7 +13,7 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <section className="bg-tomato-900 text-ivory">
+    <section className="bg-burgundy-800 text-ivory">
       <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
         <WroughtIronRail className="mb-6 h-3.5 w-36 text-brass-400/70" />
         {eyebrow && (

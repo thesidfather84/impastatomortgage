@@ -1,5 +1,4 @@
 import { compliance } from "@/config/compliance";
-import { PendingNotice } from "./PendingNotice";
 
 export function ReverseMortgageDisclosure({ className }: { className?: string }) {
   const field = compliance.reverseMortgageDisclosure;
@@ -9,11 +8,7 @@ export function ReverseMortgageDisclosure({ className }: { className?: string })
       <h3 className="mb-2 font-display text-sm font-semibold uppercase tracking-wide text-cypress-700">
         Reverse Mortgage Disclosure
       </h3>
-      {field.status === "confirmed" ? (
-        <p className="text-sm text-cypress-700">{field.value}</p>
-      ) : (
-        <PendingNotice label="Required reverse mortgage / HECM advertising disclosure" />
-      )}
+      {field.status === "confirmed" && <p className="text-sm text-cypress-700">{field.value}</p>}
       <p className="mt-2 text-sm text-cypress-700">
         A reverse mortgage is a loan that must be repaid, typically when the
         borrower sells the home, permanently moves out, or passes away.

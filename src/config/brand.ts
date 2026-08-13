@@ -24,6 +24,9 @@ export const brand = {
   /** Alternate tagline, available for secondary placements/testing. */
   taglineAlternate: "Louisiana Roots. Italian Heritage. A Better Way Home.",
 
+  /** Small kicker shown under the wordmark in the header. */
+  headerTagline: "Rooted in Louisiana. Guided by Experience.",
+
   /** Short description of Dawn's differentiator. */
   positioningStatement:
     "Decades understanding homes, real estate, families, and financing — before Dawn ever helped anyone with a mortgage.",

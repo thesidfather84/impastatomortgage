@@ -1,7 +1,4 @@
 import { contact } from "@/config/contact";
-import { TextSizeControl } from "@/components/accessibility/TextSizeControl";
-import { ReadThisPage } from "@/components/accessibility/ReadThisPage";
-import { ScheduleConversationButton } from "./ScheduleConversationButton";
 import { FleurDeLis } from "./motifs/FleurDeLis";
 
 export function TopUtilityBar() {
@@ -17,16 +14,10 @@ export function TopUtilityBar() {
           <a href={contact.phoneHref} className="font-semibold text-ivory/90 hover:text-brass-200">
             Call Dawn
           </a>
-          <span className="hidden text-ivory/25 sm:inline">|</span>
-          <a href={contact.smsHref} className="hidden font-semibold text-ivory/90 hover:text-brass-200 sm:inline">
+          <span className="text-ivory/25">|</span>
+          <a href={contact.smsHref} className="font-semibold text-ivory/90 hover:text-brass-200">
             Text Dawn
           </a>
-          <span className="hidden text-ivory/25 sm:inline">|</span>
-          <ScheduleConversationButton className="hidden sm:block" />
-          <div className="flex items-center gap-3 border-l border-ivory/15 pl-4">
-            <ReadThisPage />
-            <TextSizeControl />
-          </div>
         </div>
       </div>
     </div>

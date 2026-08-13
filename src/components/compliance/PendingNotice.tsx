@@ -1,9 +1,11 @@
 import { cn } from "@/lib/cn";
 
 /**
- * Visible stand-in for a regulated disclosure that hasn't been confirmed
- * yet. Used so missing compliance data shows up as an obvious TODO instead
- * of silently disappearing from the page.
+ * INTERNAL USE ONLY. Renders a visible "not confirmed yet" flag for a
+ * compliance field. This must never appear on a public-facing page — it
+ * is only used by the internal /dev/compliance-status page, which itself
+ * 404s in production. Public components silently omit unconfirmed fields
+ * instead of rendering this.
  */
 export function PendingNotice({
   label,

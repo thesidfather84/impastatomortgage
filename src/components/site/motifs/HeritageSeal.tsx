@@ -4,18 +4,20 @@ import { compliance } from "@/config/compliance";
 const licenseYear = compliance.realEstate.firstIssueDate.value?.slice(0, 4);
 
 /**
- * A provenance-style heritage medallion — a seal, not a badge/pill. Defaults
- * to the verified Louisiana real-estate license year rather than an
- * unverified "years of experience" figure. Used in the hero and the story
- * section.
+ * A provenance-style heritage medallion — a seal, not a badge/pill.
+ *
+ * IMPORTANT: this seal reflects Dawn's verified Louisiana real-estate
+ * license history (first issued 2005), NOT a founding date for Impastato
+ * Mortgage as a company. Never word this as "Impastato Mortgage Est.
+ * 2005" — that would misrepresent when the brand itself started.
  */
 export function HeritageSeal({
-  line1 = licenseYear ? `Est. ${licenseYear}` : "Louisiana",
-  line2 = "Louisiana Real Estate",
+  eyebrow = "Louisiana Real Estate",
+  since = licenseYear,
   className,
 }: {
-  line1?: string;
-  line2?: string;
+  eyebrow?: string;
+  since?: string;
   className?: string;
 }) {
   return (
@@ -25,10 +27,14 @@ export function HeritageSeal({
       <div className="absolute inset-2 rounded-full border border-brass-400/40" />
       <div className="flex flex-col items-center gap-1 px-3 text-center">
         <FleurDeLis className="h-4 w-4 text-brass-400" />
-        <p className="font-display text-lg font-semibold leading-none">{line1}</p>
-        <p className="max-w-[6.5rem] text-[0.6rem] font-medium uppercase tracking-[0.14em] text-brass-100/80">
-          {line2}
+        <p className="max-w-[6.5rem] text-[0.62rem] font-semibold uppercase leading-tight tracking-[0.12em]">
+          {eyebrow}
         </p>
+        {since && (
+          <p className="font-display text-base font-semibold uppercase tracking-wide text-brass-300">
+            Since {since}
+          </p>
+        )}
       </div>
     </div>
   );

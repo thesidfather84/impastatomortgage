@@ -9,7 +9,7 @@ export function IMMonogram({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        "relative flex shrink-0 items-center justify-center rounded-full border border-brass-400 bg-tomato-900",
+        "relative flex shrink-0 items-center justify-center rounded-full border border-brass-400 bg-burgundy-800",
         className
       )}
       aria-hidden="true"

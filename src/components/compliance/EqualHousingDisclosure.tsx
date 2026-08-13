@@ -1,12 +1,9 @@
 import { compliance } from "@/config/compliance";
-import { PendingNotice } from "./PendingNotice";
 
 export function EqualHousingDisclosure({ className }: { className?: string }) {
   const field = compliance.equalHousingOpportunity;
 
-  if (field.status === "todo") {
-    return <PendingNotice label="Equal Housing Opportunity statement" className={className} />;
-  }
+  if (field.status !== "confirmed") return null;
 
   return (
     <div className={className}>

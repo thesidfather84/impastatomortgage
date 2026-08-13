@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHeader } from "@/components/site/PageHeader";
 import { InfoSection } from "@/components/site/InfoSection";
 import { PageCtaBand } from "@/components/site/PageCtaBand";
 import { PortraitPlaceholder } from "@/components/ui/PortraitPlaceholder";
-import { LicensingDisclosure } from "@/components/compliance/LicensingDisclosure";
 import { pageMetadata } from "@/config/seo";
 import { brand } from "@/config/brand";
 
@@ -59,7 +59,19 @@ export default function AboutDawnPage() {
           </InfoSection>
 
           <InfoSection title="Licensing">
-            <LicensingDisclosure />
+            <p>
+              Dawn is licensed as a mortgage loan originator through Argent
+              Lending LLC and holds an active Louisiana real-estate license.
+              Full licensing details, including NMLS numbers, are available
+              on the{" "}
+              <Link
+                href="/licensing-disclosures"
+                className="font-semibold underline underline-offset-2"
+              >
+                Licensing &amp; Disclosures
+              </Link>{" "}
+              page.
+            </p>
           </InfoSection>
         </div>
       </div>

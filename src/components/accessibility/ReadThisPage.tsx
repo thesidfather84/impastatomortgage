@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/cn";
 
 /**
  * Progressive-enhancement "Read This Page" control.
  * Only renders when the browser actually supports speech synthesis —
  * no unreliable polyfills or fake playback states.
  */
-export function ReadThisPage() {
+export function ReadThisPage({ className }: { className?: string }) {
   const [supported, setSupported] = useState(false);
   const [speaking, setSpeaking] = useState(false);
 
@@ -59,7 +60,10 @@ export function ReadThisPage() {
       type="button"
       onClick={handleToggle}
       aria-pressed={speaking}
-      className="rounded px-2 py-1 text-xs font-semibold tracking-wide text-ivory hover:bg-cypress-600"
+      className={cn(
+        "w-full rounded px-3 py-2.5 text-left text-sm font-semibold text-cypress-900 hover:bg-brass-100/50",
+        className
+      )}
     >
       {speaking ? "Stop Reading" : "Read This Page"}
     </button>

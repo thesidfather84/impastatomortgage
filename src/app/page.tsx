@@ -1,4 +1,5 @@
 import { Hero } from "@/components/site/Hero";
+import { TrustStrip } from "@/components/site/TrustStrip";
 import { PathwaysSection } from "@/components/site/PathwaysSection";
 import { StorySection } from "@/components/site/StorySection";
 import { LocalSection } from "@/components/site/LocalSection";
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <TrustStrip />
       <PathwaysSection />
       <StorySection />
       <LocalSection />

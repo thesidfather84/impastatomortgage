@@ -47,9 +47,9 @@ export function AskDawnPanel() {
       role="dialog"
       aria-modal="true"
       aria-label="Ask Dawn"
-      className="fixed inset-x-0 bottom-0 z-50 flex h-[85vh] max-h-[640px] w-full flex-col rounded-t-2xl border border-brass-400/40 bg-ivory shadow-2xl sm:inset-auto sm:bottom-24 sm:right-6 sm:h-[560px] sm:w-[390px] sm:rounded-2xl"
+      className="fixed inset-x-0 bottom-0 z-50 flex h-[75vh] max-h-[560px] w-full flex-col rounded-t-2xl border border-brass-400/40 bg-ivory shadow-2xl sm:inset-auto sm:bottom-24 sm:right-6 sm:h-[480px] sm:w-[350px] sm:rounded-2xl"
     >
-      <header className="flex items-center justify-between gap-2 rounded-t-2xl border-b border-brass-400/30 bg-tomato-900 px-4 py-3.5 sm:rounded-t-2xl">
+      <header className="flex items-center justify-between gap-2 rounded-t-2xl border-b border-brass-400/30 bg-burgundy-800 px-4 py-3.5 sm:rounded-t-2xl">
         <div className="flex items-center gap-3">
           <DawnMonogram className="h-9 w-9 text-base" />
           <div>

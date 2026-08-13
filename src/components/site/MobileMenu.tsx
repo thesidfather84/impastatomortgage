@@ -5,6 +5,7 @@ import Link from "next/link";
 import { mobileNav } from "@/config/nav";
 import { contact } from "@/config/contact";
 import { ContactButtonRow } from "@/components/ui/ContactButtons";
+import { AccessibilityMenu } from "@/components/accessibility/AccessibilityMenu";
 import { FleurDeLis } from "./motifs/FleurDeLis";
 
 export function MobileMenu() {
@@ -90,8 +91,9 @@ export function MobileMenu() {
             </ul>
           </nav>
 
-          <div className="border-t border-cypress-100 bg-ivory-deep px-4 py-4">
+          <div className="flex items-center justify-between gap-3 border-t border-cypress-100 bg-ivory-deep px-4 py-4">
             <ContactButtonRow />
+            <AccessibilityMenu />
           </div>
         </div>
       )}

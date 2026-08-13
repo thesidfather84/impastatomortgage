@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { primaryNav } from "@/config/nav";
 import { contact } from "@/config/contact";
+import { brand } from "@/config/brand";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { TopUtilityBar } from "./TopUtilityBar";
 import { ResourcesDropdown } from "./ResourcesDropdown";
+import { AccessibilityMenu } from "@/components/accessibility/AccessibilityMenu";
 
 export function SiteHeader() {
   return (
@@ -15,14 +17,19 @@ export function SiteHeader() {
       <TopUtilityBar />
       <header className="sticky top-0 z-40 border-b border-cypress-100 bg-ivory/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6 lg:px-8">
-          <Logo />
+          <div>
+            <Logo />
+            <p className="mt-0.5 hidden pl-[2.9rem] text-[0.65rem] font-medium uppercase tracking-[0.12em] text-cypress-700/70 sm:block">
+              {brand.headerTagline}
+            </p>
+          </div>
 
           <nav aria-label="Primary" className="hidden lg:block">
             <ul className="flex items-center gap-7">
               {/* Buy, Refinance, Reverse Mortgage */}
               {primaryNav.slice(0, 3).map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-[0.95rem] font-medium text-cypress-900 hover:text-tomato-600">
+                  <Link href={item.href} className="text-[0.95rem] font-medium text-cypress-900 hover:text-burgundy-600">
                     {item.label}
                   </Link>
                 </li>
@@ -33,7 +40,7 @@ export function SiteHeader() {
               {/* About Dawn */}
               {primaryNav.slice(3).map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="text-[0.95rem] font-medium text-cypress-900 hover:text-tomato-600">
+                  <Link href={item.href} className="text-[0.95rem] font-medium text-cypress-900 hover:text-burgundy-600">
                     {item.label}
                   </Link>
                 </li>
@@ -41,7 +48,7 @@ export function SiteHeader() {
               <li>
                 <Link
                   href="/ask-dawn"
-                  className="text-[0.95rem] font-semibold text-tomato-600 hover:text-tomato-700"
+                  className="text-[0.95rem] font-semibold text-burgundy-600 hover:text-burgundy-800"
                 >
                   Ask Dawn
                 </Link>
@@ -64,6 +71,7 @@ export function SiteHeader() {
               </svg>
               {contact.phoneDisplay}
             </a>
+            <AccessibilityMenu />
           </div>
 
           <MobileMenu />

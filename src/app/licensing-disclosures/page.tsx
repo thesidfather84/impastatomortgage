@@ -36,7 +36,7 @@ export default function LicensingDisclosuresPage() {
           </p>
         </InfoSection>
 
-        <InfoSection title="Mortgage licensing">
+        <InfoSection title="Licensing">
           <LicensingDisclosure />
         </InfoSection>
 
@@ -50,11 +50,11 @@ export default function LicensingDisclosuresPage() {
 
         <InfoSection title="A note on Dawn's real-estate license">
           <p>
-            Dawn&apos;s Louisiana real-estate license is held separately from
-            her mortgage relationship above.{" "}
-            {compliance.realEstate.supervisingBrokerage.value} is not
-            affiliated with {compliance.mortgage.currentCompanyLegalName.value}{" "}
-            unless separately confirmed.
+            Dawn&apos;s Louisiana real-estate license is held independently
+            from her mortgage relationship above.{" "}
+            {compliance.realEstate.supervisingBrokerage.value} and{" "}
+            {compliance.mortgage.currentCompanyLegalName.value} are not
+            represented as affiliated companies.
           </p>
         </InfoSection>
       </div>

@@ -7,14 +7,19 @@
  * RULES FOR EDITING THIS FILE:
  * 1. Never invent a value. If a fact isn't confirmed by Dawn/the company,
  *    leave `value: null` and `status: "todo"`.
- * 2. Compliance-facing components (ComplianceFooter, LicensingDisclosure,
- *    EqualHousingDisclosure, MortgageAdvertisingDisclosure,
- *    ReverseMortgageDisclosure, LicensingDisclosuresPage) must render
- *    something visible for every field — either the real value or a
- *    clearly labeled "pending / compliance review required" notice. They
- *    must never silently omit a disclosure because the value is null.
+ * 2. Public-facing components (LicensingDisclosure, EqualHousingDisclosure,
+ *    MortgageAdvertisingDisclosure, ReverseMortgageDisclosure,
+ *    PublicLicenseSummary) must NEVER render "Pending" / TODO / internal
+ *    launch-state language to customers. They silently omit any field
+ *    that isn't `confirmed` — never invent wording just to avoid an
+ *    empty section. Missing fields are surfaced instead through:
+ *      a) a console warning logged when this module loads server-side,
+ *      b) tests in src/__tests__/compliance.test.tsx, and
+ *      c) the internal /dev/compliance-status page, which 404s in
+ *         production and is never linked from public navigation.
  * 3. This site has NOT completed a legal/compliance verification pass.
- *    Nothing here should be treated as final until that review happens.
+ *    Nothing here should be treated as final until that review happens —
+ *    but that fact belongs in internal tooling, not on public pages.
  *
  * VERIFIED-DATA NOTE (see /licensing-disclosures):
  * Dawn currently originates mortgage business through a third-party
@@ -145,3 +150,13 @@ export const missingComplianceFields = complianceFieldStatuses
   .map((f) => f.path);
 
 export const isComplianceComplete = missingComplianceFields.length === 0;
+
+// Server-only dev warning — never runs in the browser bundle. This is the
+// "development console warnings" surfacing mechanism described above; it
+// intentionally does not gate on NODE_ENV so it still shows up in build
+// logs (which are internal, not customer-visible).
+if (typeof window === "undefined" && missingComplianceFields.length > 0) {
+  console.warn(
+    `[compliance] ${missingComplianceFields.length} field(s) still pending verification: ${missingComplianceFields.join(", ")}. See src/config/compliance.ts, or run the app in development and visit /dev/compliance-status.`
+  );
+}
