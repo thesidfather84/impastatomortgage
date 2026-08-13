@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHeader } from "@/components/site/PageHeader";
 import { AskDawnInline } from "@/components/ask-dawn/AskDawnInline";
 import { pageMetadata } from "@/config/seo";
@@ -21,6 +22,17 @@ export default function AskDawnPage() {
 
       <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 lg:px-8">
         <AskDawnInline />
+
+        <p className="mt-6 text-center text-sm text-cypress-700">
+          Curious what a home might really cost each month?{" "}
+          <Link
+            href="/calculators/home-payment"
+            className="font-semibold underline underline-offset-2 hover:text-cypress-900"
+          >
+            Try Dawn&apos;s Home Payment Explorer
+          </Link>
+          .
+        </p>
       </div>
     </>
   );

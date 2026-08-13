@@ -70,8 +70,8 @@ export const compliance = {
    *
    * LREC ADVERTISING SCAFFOLDING (added after the 2026-08 LREC audit):
    * ---------------------------------------------------------------------
-   * The four `sponsoringBroker*` fields below exist because the Louisiana
-   * Real Estate Commission's CURRENT "Advertising Guidelines Checklist"
+   * The `sponsoringBroker*` fields below exist because the Louisiana Real
+   * Estate Commission's CURRENT "Advertising Guidelines Checklist"
    * (published at lrec.gov/enforcement/advertising-guidelines, citing LAC
    * Title 46:LXVII Chapter 25, §2515 and §2501(F)) requires that an
    * associate broker/salesperson's own website show, on EVERY page:
@@ -83,36 +83,49 @@ export const compliance = {
    * guidance) a phone number owned by the brokerage itself that reaches
    * the broker directly — not a line that routes through Dawn.
    *
-   * None of these values are currently known to this codebase. Per the
-   * audit, they must come from Dawn or her sponsoring broker directly —
-   * never scraped from an old profile, business listing, or search
-   * result, since a wrong broker phone/address is worse than a missing
-   * one. Leave every one of these `todo` until a human confirms it.
+   * 2026-08 CORRECTION: `supervisingBrokerage` previously read "Celestino
+   * Investment Group LLC," which Dawn has confirmed is stale. Her current
+   * official affiliation, per her own ERA.com agent profile
+   * (era.com/agent/detail/la/slidell/agents/dawn-impastato/...), is ERA
+   * Top Agent Realty, Slidell, LA. That page was fetched directly and
+   * verified to source `supervisingBrokerage`, `sponsoringBrokerCityState`,
+   * `sponsoringBrokerOfficeAddress`, `sponsoringBrokerFranchiseStatus`, and
+   * `independentlyOwnedAndOperatedDisclosure` below (the profile displays
+   * that exact franchise-disclosure sentence). Still NOT shown on that
+   * page and left `todo`, per explicit instruction not to guess them:
+   *   - `sponsoringBrokerPhone` — no brokerage phone number is shown there.
+   *   - `sponsoringBrokerJurisdiction` — almost certainly "Louisiana," but
+   *     that page doesn't state a jurisdiction, so it stays unconfirmed
+   *     rather than inferred.
+   * "ERA Top Agent Realty" is the brokerage's public-facing name, verified
+   * as Dawn's *current affiliation* — it is not independently confirmed as
+   * the exact character-for-character trade name on file with LREC per
+   * §2501(D). Treat `supervisingBrokerage` as "who Dawn is currently with"
+   * (safe to state), not yet as "the exact LREC-registered advertising
+   * name" (a stricter bar `sponsoringBrokerJurisdiction`/`Phone` share).
    *
-   * `sponsoringBrokerFranchiseStatus` is separate: §2509 requires an
-   * "independently owned and operated" disclosure only if the sponsoring
-   * brokerage is affiliated with a franchise organization. We don't know
-   * whether Celestino Investment Group LLC is a franchise, so this is
-   * tracked as its own pending fact rather than assumed either way.
-   *
-   * THRESHOLD QUESTION (also unresolved, and not a `ComplianceField` since
-   * it isn't a fact to fill in — it's a judgment call):
+   * THRESHOLD QUESTION (still unresolved — this correction did not answer
+   * it, and is not a `ComplianceField` since it isn't a fact to fill in):
    * TODO: Does ImpastatoMortgage.com constitute Louisiana real-estate
    * advertising under Chapter 25 merely because it promotes Dawn's
    * real-estate experience as a mortgage-business differentiator (see
    * `realEstateExperienceStatement` below and `brand.experienceHeadline`)?
-   * If yes, every page of this site would need the four items above. If
-   * no, the existing /licensing-disclosures-only treatment may remain
-   * sufficient. This requires confirmation from Dawn's sponsoring broker,
-   * LREC, or qualified legal/compliance counsel — it is explicitly NOT
-   * something to infer or guess from the rule text alone.
+   * If yes, every page of this site would need broker name/city-state/
+   * jurisdiction/phone. If no, the existing /licensing-disclosures-only
+   * treatment may remain sufficient. Still requires confirmation from
+   * Dawn's sponsoring broker, LREC, or qualified legal/compliance
+   * counsel — not something to infer from the rule text alone.
    *
    * FUTURE DESIGN NOTE, once/if the above is confirmed to require
-   * every-page display: per site design direction, that disclosure
-   * belongs in the existing site footer (ComplianceFooter) as a compact,
-   * quiet addition next to the mortgage NMLS summary — never as a hero
-   * overlay, popup, nav item, or repeated in-page warning block. Until
-   * then, none of these fields should be wired into any public component.
+   * every-page display AND the phone/jurisdiction gaps are filled: per
+   * site design direction, that disclosure belongs in the existing site
+   * footer (ComplianceFooter) as a compact, quiet addition next to the
+   * mortgage NMLS summary — never as a hero overlay, popup, nav item, or
+   * repeated in-page warning block. Until both conditions are met, none
+   * of these fields are wired into the footer or any other site-wide
+   * component — only into the dedicated /licensing-disclosures page,
+   * which has always carried full real-estate detail regardless of the
+   * threshold question above.
    */
   realEstate: {
     licenseeLegalName: confirmed("Dawn Bullard Impastato"),
@@ -121,20 +134,24 @@ export const compliance = {
     licenseStatus: confirmed("Active"),
     firstIssueDate: confirmed("2005-07-01"),
     /**
-     * The supervisor/sponsoring brokerage shown on the Louisiana licensing
-     * record. This is a real-estate relationship — do not imply it is
-     * affiliated with Dawn's mortgage company (Argent Lending LLC) unless
-     * separately verified.
+     * The current sponsoring brokerage, per Dawn's own ERA.com agent
+     * profile (verified 2026-08). This is a real-estate relationship — do
+     * not imply it is affiliated with Dawn's mortgage company (Argent
+     * Lending LLC) unless separately verified.
      */
-    supervisingBrokerage: confirmed("Celestino Investment Group LLC"),
-    /** LREC §2501(F)/§2515: a brokerage-owned phone number, not Dawn's. */
+    supervisingBrokerage: confirmed("ERA Top Agent Realty"),
+    /** LREC §2501(F)/§2515: a brokerage-owned phone number, not Dawn's. Not shown on the verified ERA profile — do not guess. */
     sponsoringBrokerPhone: todo<string>(),
-    /** LREC §2515: city and state of the broker's main or branch office. */
-    sponsoringBrokerCityState: todo<string>(),
-    /** LREC §2515: the regulatory jurisdiction(s) the broker is licensed in. */
+    /** LREC §2515: city and state of the broker's main or branch office. Verified via Dawn's ERA.com profile. */
+    sponsoringBrokerCityState: confirmed("Slidell, Louisiana"),
+    /** Full street address of the sponsoring broker's office, per the verified ERA.com profile. Not itself an LREC minimum (city/state is), but more complete for the full licensing-disclosures page. */
+    sponsoringBrokerOfficeAddress: confirmed("1846 Front St, Slidell, LA 70458"),
+    /** LREC §2515: the regulatory jurisdiction(s) the broker is licensed in. Not stated on the verified ERA profile — do not guess, even though "Louisiana" is likely. */
     sponsoringBrokerJurisdiction: todo<string>(),
-    /** LREC §2509: whether the sponsoring brokerage is a franchise (triggers "independently owned and operated" disclosure). */
-    sponsoringBrokerFranchiseStatus: todo<boolean>(),
+    /** LREC §2509: whether the sponsoring brokerage is a franchise. Confirmed true — ERA is a national real-estate franchise, and the office's own profile displays the standard franchise disclosure below. */
+    sponsoringBrokerFranchiseStatus: confirmed(true),
+    /** LREC §2509: the exact franchise disclosure sentence, verified verbatim on the ERA.com profile itself. Only meaningful — and only ever rendered — when sponsoringBrokerFranchiseStatus is confirmed true. */
+    independentlyOwnedAndOperatedDisclosure: confirmed("Each office is independently owned and operated."),
   },
 
   /** Required state-specific advertising/disclosure language. */

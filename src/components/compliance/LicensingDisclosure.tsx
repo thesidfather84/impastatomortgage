@@ -30,7 +30,15 @@ export function LicensingDisclosure({ className }: { className?: string }) {
       ? `First issued ${formatUsDate(realEstate.firstIssueDate.value)}`
       : null,
     realEstate.supervisingBrokerage.status === "confirmed" ? realEstate.supervisingBrokerage.value : null,
+    realEstate.sponsoringBrokerOfficeAddress.status === "confirmed"
+      ? realEstate.sponsoringBrokerOfficeAddress.value
+      : null,
   ].filter((line): line is string => Boolean(line));
+
+  const showFranchiseDisclosure =
+    realEstate.sponsoringBrokerFranchiseStatus.status === "confirmed" &&
+    realEstate.sponsoringBrokerFranchiseStatus.value === true &&
+    realEstate.independentlyOwnedAndOperatedDisclosure.status === "confirmed";
 
   return (
     <div className={className}>
@@ -66,6 +74,11 @@ export function LicensingDisclosure({ className }: { className?: string }) {
             {realEstateLines.map((line) => (
               <p key={line}>{line}</p>
             ))}
+            {showFranchiseDisclosure && (
+              <p className="pt-1 italic">
+                {realEstate.independentlyOwnedAndOperatedDisclosure.value}
+              </p>
+            )}
           </div>
         </div>
       )}

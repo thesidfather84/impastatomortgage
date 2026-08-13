@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "secondary" | "ghost" | "outline-light";
+type Variant = "primary" | "secondary" | "ghost" | "outline-light" | "featured";
 type Size = "md" | "lg";
 
 const VARIANT_CLASSES: Record<Variant, string> = {
@@ -14,6 +14,11 @@ const VARIANT_CLASSES: Record<Variant, string> = {
     "bg-transparent text-cypress-600 hover:bg-cypress-50 border border-cypress-100",
   "outline-light":
     "bg-transparent text-ivory hover:bg-white/10 border border-ivory/60",
+  /** Reserved for a page's single standout feature CTA (e.g. the Home
+   * Payment Explorer teaser) — the brand's signature tomato accent, not
+   * meant to be the default button color everywhere. */
+  featured:
+    "bg-tomato-600 text-ivory hover:bg-tomato-700 border border-transparent",
 };
 
 const SIZE_CLASSES: Record<Size, string> = {
