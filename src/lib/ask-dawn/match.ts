@@ -1,27 +1,9 @@
 import type { KnowledgeItem } from "@/content/ask-dawn/types";
-
-const STOPWORDS = new Set([
-  "a", "an", "the", "is", "are", "was", "were", "what", "whats", "how",
-  "do", "does", "did", "i", "im", "my", "me", "you", "your", "can",
-  "could", "should", "would", "of", "for", "to", "in", "on", "about",
-  "dawn", "please", "hi", "hello", "hey", "and", "or", "it", "this",
-  "that",
-]);
+import { tokenize } from "./text";
 
 // Short acronyms that ARE meaningful even though they're short — never
 // treat these as noise.
 const KEEP_SHORT = new Set(["fha", "apr", "dti", "ltv", "arm", "hecm"]);
-
-function normalize(text: string): string {
-  return text.toLowerCase().replace(/[^a-z0-9\s]/g, " ").replace(/\s+/g, " ").trim();
-}
-
-function tokenize(text: string): string[] {
-  return normalize(text)
-    .split(" ")
-    .filter((t) => t.length > 0)
-    .filter((t) => KEEP_SHORT.has(t) || !STOPWORDS.has(t));
-}
 
 export type MatchResult = {
   item: KnowledgeItem;
@@ -37,7 +19,7 @@ export function findBestMatch(
   query: string,
   knowledgeBase: KnowledgeItem[]
 ): MatchResult | null {
-  const queryTokens = new Set(tokenize(query));
+  const queryTokens = new Set(tokenize(query, KEEP_SHORT));
   if (queryTokens.size === 0) return null;
 
   let best: MatchResult | null = null;
@@ -46,7 +28,7 @@ export function findBestMatch(
     if (!item.approved) continue;
 
     for (const variant of item.questionVariants) {
-      const variantTokens = new Set(tokenize(variant));
+      const variantTokens = new Set(tokenize(variant, KEEP_SHORT));
       if (variantTokens.size === 0) continue;
 
       const overlap = [...variantTokens].filter((t) => queryTokens.has(t)).length;

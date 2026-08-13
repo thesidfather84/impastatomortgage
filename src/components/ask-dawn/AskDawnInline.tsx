@@ -5,7 +5,11 @@ import { useAskDawn } from "./AskDawnProvider";
 import { AskDawnMessageBubble } from "./AskDawnMessageBubble";
 import { VoiceInputButton } from "./VoiceInputButton";
 import { DawnMonogram } from "./DawnMonogram";
-import { greeting } from "@/content/ask-dawn/personality";
+import { poolOptions } from "@/content/ask-dawn/personality";
+
+// A single fixed line (not randomized) so server and client render the
+// same idle placeholder with no hydration mismatch.
+const IDLE_GREETING = poolOptions("greeting")[0];
 
 const EXAMPLE_QUESTIONS = [
   "What is a reverse mortgage?",
@@ -47,7 +51,7 @@ export function AskDawnInline() {
 
       <div ref={listRef} className="max-h-[50vh] min-h-[280px] space-y-4 overflow-y-auto px-5 py-5">
         {messages.length === 0 && (
-          <p className="text-sm italic text-cypress-700">{greeting}</p>
+          <p className="text-sm italic text-cypress-700">{IDLE_GREETING}</p>
         )}
         {messages.map((message) => (
           <AskDawnMessageBubble key={message.id} message={message} />

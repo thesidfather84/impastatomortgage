@@ -28,6 +28,36 @@ export function AskDawnMessageBubble({ message }: { message: ConversationMessage
     );
   }
 
+  if (message.kind === "trivia") {
+    return (
+      <div className="flex items-start gap-2.5">
+        <DawnMonogram className="mt-0.5" />
+        <div className="flex flex-1 flex-col gap-2">
+          {message.intro && (
+            <p className="text-xs italic text-burgundy-500/80">{message.intro}</p>
+          )}
+          <div className="max-w-[90%] rounded-2xl rounded-bl-sm border border-brass-400/25 bg-ivory-deep px-4 py-3 text-sm text-charcoal-900">
+            <p>{message.text}</p>
+            <p className="mt-2 text-xs text-cypress-700">
+              Source:{" "}
+              <a
+                href={message.fact.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline hover:text-cypress-800"
+              >
+                {message.fact.sourceTitle}
+              </a>
+            </p>
+          </div>
+          {message.more && (
+            <p className="text-xs italic text-cypress-700">{message.more}</p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   if (message.kind === "answer") {
     return (
       <div className="flex items-start gap-2.5">
