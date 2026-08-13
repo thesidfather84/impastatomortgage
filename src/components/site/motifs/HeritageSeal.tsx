@@ -1,15 +1,16 @@
 import { FleurDeLis } from "./FleurDeLis";
 import { compliance } from "@/config/compliance";
 
-const licenseYear = compliance.realEstate.firstIssueDate.value?.slice(0, 4);
+const licenseYear = compliance.realEstate.firstIssueDate.value ?? undefined;
 
 /**
  * A provenance-style heritage medallion — a seal, not a badge/pill.
  *
  * IMPORTANT: this seal reflects Dawn's verified Louisiana real-estate
- * license history (first issued 2005), NOT a founding date for Impastato
- * Mortgage as a company. Never word this as "Impastato Mortgage Est.
- * 2005" — that would misrepresent when the brand itself started.
+ * license history (first obtained 1991, confirmed directly by Dawn — year
+ * only, no exact month/day), NOT a founding date for Impastato Mortgage
+ * as a company. Never word this as "Impastato Mortgage Est. 1991" — that
+ * would misrepresent when the brand itself started.
  */
 export function HeritageSeal({
   eyebrow = "Louisiana Real Estate",

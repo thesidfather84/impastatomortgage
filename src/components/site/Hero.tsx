@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { brand } from "@/config/brand";
 import { contact } from "@/config/contact";
+import { ARGENT_APPLICATION_URL } from "@/config/application";
 import { AskDawnHeroButton } from "@/components/ask-dawn/AskDawnHeroButton";
+import { CtaButton } from "@/components/ui/CtaButton";
 import { WroughtIronRail } from "./motifs/WroughtIronRail";
 
 const HERO_IMAGE_SRC = "/images/impastato-new-orleans-hero.png";
@@ -60,11 +62,14 @@ export function Hero() {
             Talk to Dawn
           </a>
           <AskDawnHeroButton variant="filled" />
+          <CtaButton href={ARGENT_APPLICATION_URL} variant="secondary" size="lg" newTab>
+            Start Application
+          </CtaButton>
         </div>
 
         <p className="mt-5 text-sm text-ivory/80 [text-shadow:0_1px_3px_rgba(0,0,0,0.6)]">
-          Or call directly:{" "}
-          <a href={contact.phoneHref} className="font-semibold text-brass-200 hover:text-brass-100">
+          Call or text Dawn:{" "}
+          <a href={contact.phoneHref} className="text-base font-bold text-brass-200 hover:text-brass-100">
             {contact.phoneDisplay}
           </a>
         </p>

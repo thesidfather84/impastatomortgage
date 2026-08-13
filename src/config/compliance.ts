@@ -83,6 +83,17 @@ export const compliance = {
    * guidance) a phone number owned by the brokerage itself that reaches
    * the broker directly — not a line that routes through Dawn.
    *
+   * 2026-08 CORRECTION (license first-issue date): `firstIssueDate` below
+   * previously read "2005-07-01," sourced from an LREC record that most
+   * likely reflected a later license-type change (e.g. an Associate Broker
+   * upgrade), not Dawn's original licensure. Dawn has since directly
+   * confirmed she first obtained her Louisiana real-estate license in
+   * 1991 — only the year is confirmed (no exact month/day), so the field
+   * intentionally holds a year-only value now. `realEstateExperienceStatement`
+   * below was updated to the durable "since 1991" phrasing for the same
+   * reason: a fixed number like "20+ years" goes stale every year, while
+   * "since 1991" does not.
+   *
    * 2026-08 CORRECTION: `supervisingBrokerage` previously read "Celestino
    * Investment Group LLC," which Dawn has confirmed is stale. Her current
    * official affiliation, per her own ERA.com agent profile
@@ -132,7 +143,8 @@ export const compliance = {
     licenseType: confirmed("Associate Broker"),
     licenseNumber: confirmed("BROK.73582-ASA"),
     licenseStatus: confirmed("Active"),
-    firstIssueDate: confirmed("2005-07-01"),
+    /** Year-only — Dawn has directly confirmed 1991 as when she first obtained her Louisiana real-estate license; no exact month/day is confirmed. See the correction note above. */
+    firstIssueDate: confirmed("1991"),
     /**
      * The current sponsoring brokerage, per Dawn's own ERA.com agent
      * profile (verified 2026-08). This is a real-estate relationship — do
@@ -183,19 +195,26 @@ export const compliance = {
   mortgageAdvertisingDisclosure: todo<string>(),
 
   /**
-   * Real-estate experience statement used in marketing copy. Derived
-   * conservatively from the verified license issue date above (2005) —
-   * NOT a claim that Dawn has been *licensed* for 30 years. Update this
-   * single field if/when Dawn confirms a fuller career history, and the
-   * change will propagate everywhere it's referenced.
+   * Real-estate experience statement used in marketing copy. Sourced
+   * directly from Dawn's confirmed license first-issue year (1991, see
+   * `realEstate.firstIssueDate` above). Uses durable "since 1991" wording
+   * rather than a recalculated year count (e.g. "35 years") so it never
+   * goes stale with the calendar. This is a REAL-ESTATE licensing fact
+   * only — it must never be presented as, or blended with, mortgage
+   * origination experience.
    */
   realEstateExperienceStatement: confirmed(
-    "Louisiana real-estate experience dating back more than 20 years"
+    "Licensed in Louisiana real estate since 1991"
   ),
 
   /**
-   * Years specifically originating mortgages (distinct from real estate
-   * experience). Must not be assumed equal to real-estate years.
+   * Year/date Dawn was first licensed as a mortgage loan originator
+   * (distinct from her real-estate license above — must never be assumed
+   * equal to it, and must never be inferred from it). Remains `todo`
+   * because no authoritative licensing source in this project confirms a
+   * first-licensed mortgage date. Do NOT fill this in with a guess (e.g.
+   * "2022") — leave it `todo` until Dawn or an authoritative NMLS/state
+   * record confirms it.
    */
   yearsMortgageOriginationExperience: todo<string>(),
 } as const;

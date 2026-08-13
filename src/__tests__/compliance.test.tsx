@@ -23,7 +23,15 @@ describe("compliance config", () => {
       status: "confirmed",
       value: "BROK.73582-ASA",
     });
-    expect(compliance.realEstate.firstIssueDate.value).toBe("2005-07-01");
+    expect(compliance.realEstate.firstIssueDate.value).toBe("1991");
+  });
+
+  it("uses durable 'since 1991' wording for real-estate experience, not a stale year count, and leaves mortgage origination tenure unverified", () => {
+    expect(compliance.realEstateExperienceStatement).toEqual({
+      status: "confirmed",
+      value: "Licensed in Louisiana real estate since 1991",
+    });
+    expect(compliance.yearsMortgageOriginationExperience.status).toBe("todo");
   });
 
   it("still leaves unverified fields as pending rather than guessing", () => {
@@ -67,7 +75,7 @@ describe("LicensingDisclosure (full licensing page)", () => {
     expect(screen.getByText(/NMLS #2354629/)).toBeInTheDocument();
     expect(screen.getByText(/NMLS #2342251/)).toBeInTheDocument();
     expect(screen.getByText(/BROK\.73582-ASA/)).toBeInTheDocument();
-    expect(screen.getByText(/First issued 07\/01\/2005/)).toBeInTheDocument();
+    expect(screen.getByText(/Licensed in Louisiana real estate since 1991/)).toBeInTheDocument();
   });
 
   it("never shows internal Pending/TODO language to the public", () => {

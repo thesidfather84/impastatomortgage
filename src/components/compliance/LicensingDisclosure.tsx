@@ -1,10 +1,5 @@
 import { compliance } from "@/config/compliance";
 
-function formatUsDate(iso: string): string {
-  const [y, m, d] = iso.split("-");
-  return `${m}/${d}/${y}`;
-}
-
 /**
  * Clean, professional licensing block for the full /licensing-disclosures
  * page. Only confirmed fields render — anything still unconfirmed is
@@ -27,7 +22,7 @@ export function LicensingDisclosure({ className }: { className?: string }) {
     realEstate.licenseNumber.status === "confirmed" ? realEstate.licenseNumber.value : null,
     realEstate.licenseStatus.status === "confirmed" ? realEstate.licenseStatus.value : null,
     realEstate.firstIssueDate.status === "confirmed"
-      ? `First issued ${formatUsDate(realEstate.firstIssueDate.value)}`
+      ? `Licensed in Louisiana real estate since ${realEstate.firstIssueDate.value}`
       : null,
     realEstate.supervisingBrokerage.status === "confirmed" ? realEstate.supervisingBrokerage.value : null,
     realEstate.sponsoringBrokerOfficeAddress.status === "confirmed"
