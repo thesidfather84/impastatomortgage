@@ -5,6 +5,7 @@ import { useAskDawn } from "./AskDawnProvider";
 import { AskDawnMessageBubble } from "./AskDawnMessageBubble";
 import { VoiceInputButton } from "./VoiceInputButton";
 import { DawnMonogram } from "./DawnMonogram";
+import { MusicToggle } from "./MusicToggle";
 import { LAGNIAPPE_TRIGGER_TEXT } from "@/lib/ask-dawn/trivia";
 
 const EXAMPLE_QUESTIONS = [
@@ -100,6 +101,10 @@ export function AskDawnPanel() {
         General info only — not a loan approval or live rates. Talk with
         Dawn about your specific situation.
       </p>
+
+      <div className="flex justify-center px-3 pt-1.5">
+        <MusicToggle />
+      </div>
 
       <div className="px-3 pt-2">
         <button

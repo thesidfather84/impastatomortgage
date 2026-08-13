@@ -3,6 +3,7 @@ import { Fraunces, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { AccessibilityProvider } from "@/components/accessibility/AccessibilityProvider";
 import { AskDawnProvider } from "@/components/ask-dawn/AskDawnProvider";
+import { AskDawnMusicProvider } from "@/components/ask-dawn/AskDawnMusicProvider";
 import { AskDawnWidget } from "@/components/ask-dawn/AskDawnWidget";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { ComplianceFooter } from "@/components/compliance/ComplianceFooter";
@@ -33,12 +34,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <OrganizationJsonLd />
         <AccessibilityProvider>
           <AskDawnProvider>
-            <SiteHeader />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <ComplianceFooter />
-            <AskDawnWidget />
+            <AskDawnMusicProvider>
+              <SiteHeader />
+              <main id="main-content" className="flex-1">
+                {children}
+              </main>
+              <ComplianceFooter />
+              <AskDawnWidget />
+            </AskDawnMusicProvider>
           </AskDawnProvider>
         </AccessibilityProvider>
       </body>

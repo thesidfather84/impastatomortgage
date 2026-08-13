@@ -56,6 +56,8 @@ type AskDawnContextValue = {
   messages: ConversationMessage[];
   askQuestion: (question: string) => void;
   openWithQuestion: (question: string) => void;
+  /** Injects a fixed system-style line directly into the conversation — for Easter eggs (logo tap, music) that aren't a typed question and so must never go through askQuestion's KB/trivia/escalation routing. */
+  announceSystemLine: (text: string) => void;
 };
 
 const AskDawnContext = createContext<AskDawnContextValue | null>(null);
@@ -245,6 +247,10 @@ export function AskDawnProvider({ children }: { children: ReactNode }) {
     [open, askQuestion]
   );
 
+  const announceSystemLine = useCallback((text: string) => {
+    setMessages((prev) => [...prev, { id: nextId(), role: "assistant", kind: "system", text }]);
+  }, []);
+
   useEffect(() => {
     function handleEasterEgg() {
       open();
@@ -281,6 +287,7 @@ export function AskDawnProvider({ children }: { children: ReactNode }) {
         messages,
         askQuestion,
         openWithQuestion,
+        announceSystemLine,
       }}
     >
       {children}

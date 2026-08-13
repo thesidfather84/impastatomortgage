@@ -5,6 +5,7 @@ import { useAskDawn } from "./AskDawnProvider";
 import { AskDawnMessageBubble } from "./AskDawnMessageBubble";
 import { VoiceInputButton } from "./VoiceInputButton";
 import { DawnMonogram } from "./DawnMonogram";
+import { MusicToggle } from "./MusicToggle";
 import { poolOptions } from "@/content/ask-dawn/personality";
 import { LAGNIAPPE_TRIGGER_TEXT } from "@/lib/ask-dawn/trivia";
 
@@ -76,6 +77,10 @@ export function AskDawnInline() {
         General info only — not a loan approval or live rates. Talk with
         Dawn about your specific situation.
       </p>
+
+      <div className="flex justify-center px-5 pt-2">
+        <MusicToggle />
+      </div>
 
       <div className="px-5 pt-3">
         <button

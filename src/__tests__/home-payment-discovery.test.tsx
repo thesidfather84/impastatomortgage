@@ -2,6 +2,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { HomePaymentExplorerBanner } from "@/components/site/HomePaymentExplorerBanner";
 import { AskDawnProvider } from "@/components/ask-dawn/AskDawnProvider";
+import { AskDawnMusicProvider } from "@/components/ask-dawn/AskDawnMusicProvider";
 import AskDawnPage from "@/app/ask-dawn/page";
 
 // jsdom doesn't implement Element.scrollTo — AskDawnInline calls it on
@@ -47,7 +48,9 @@ describe("Ask Dawn page — secondary discovery link", () => {
   it("points visitors to the Home Payment Explorer without cluttering the chat itself", () => {
     render(
       <AskDawnProvider>
-        <AskDawnPage />
+        <AskDawnMusicProvider>
+          <AskDawnPage />
+        </AskDawnMusicProvider>
       </AskDawnProvider>
     );
 

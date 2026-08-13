@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/ContactButtons";
 import { ReverseMortgageDisclosure } from "@/components/compliance/ReverseMortgageDisclosure";
 import { PublicLicenseSummary } from "@/components/compliance/PublicLicenseSummary";
+import { HomeEquityExplorerBanner } from "@/components/site/HomeEquityExplorerBanner";
 import { pageMetadata } from "@/config/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -82,6 +83,10 @@ export default function ReverseMortgagePage() {
 
         <RooflineSkyline className="pointer-events-none absolute inset-x-0 bottom-0 h-16 w-full text-cypress-900/50 sm:h-20" />
       </section>
+
+      {/* Primary discovery point for Dawn's Home Equity Explorer —
+          placed high, right after the hero, per design direction. */}
+      <HomeEquityExplorerBanner />
 
       {/* In plain English — true editorial two-column composition. */}
       <section className="bg-ivory py-24 lg:py-32">
@@ -204,6 +209,13 @@ export default function ReverseMortgagePage() {
             <TextDawnButton size="lg" variant="outline-light" />
             <EmailDawnButton size="lg" variant="outline-light" />
           </div>
+
+          <p className="mt-8 text-base text-ivory/70">
+            Want a head start on the numbers?{" "}
+            <Link href="/calculators/home-equity" className="font-semibold text-brass-200 underline underline-offset-2 hover:text-brass-100">
+              Try Dawn&apos;s Home Equity Explorer
+            </Link>
+          </p>
 
           <PublicLicenseSummary className="mx-auto mt-12 max-w-md space-y-1.5 text-base text-ivory/70" />
         </div>

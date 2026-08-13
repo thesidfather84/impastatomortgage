@@ -16,6 +16,11 @@ const resourceLinks = [
     href: "/calculators/home-payment",
   },
   {
+    title: "Home Equity Explorer",
+    description: "See what your home could make possible in retirement, using HUD's own HECM rules.",
+    href: "/calculators/home-equity",
+  },
+  {
     title: "Glossary",
     description: "Plain-English definitions for common mortgage terms.",
     href: "/resources/glossary",

@@ -22,7 +22,8 @@ export type PersonalityPool =
   | "reverseMortgageIntro"
   | "triviaIntro"
   | "triviaMore"
-  | "triviaMiss";
+  | "triviaMiss"
+  | "musicFirstPlay";
 
 const pools: Record<PersonalityPool, string[]> = {
   greeting: [
@@ -96,6 +97,15 @@ const pools: Record<PersonalityPool, string[]> = {
   triviaMiss: [
     "I don't have that one in my back pocket yet — but here's some lagniappe anyway.",
     "Can't help you with that specific one, but I've got something else good.",
+  ],
+  // Shown at most once per browser session, the first time a visitor
+  // presses play on the "A Little Musica?" Ask Dawn Easter egg — never
+  // repeated on later play/pause presses. See AskDawnMusicProvider.
+  musicFirstPlay: [
+    "Ahh, now we're talking. A little musica makes everything better.",
+    "Perfetto. Now this place has some atmosphere.",
+    "Mortgage questions with a little Palermo in the background? Bellissimo.",
+    "Okay, now Nonna would approve.",
   ],
 };
 
