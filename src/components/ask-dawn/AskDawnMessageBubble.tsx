@@ -91,15 +91,31 @@ export function AskDawnMessageBubble({
           </div>
           {message.item.relatedLinks && message.item.relatedLinks.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {message.item.relatedLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-full border border-brass-400/40 px-3 py-1 text-xs font-medium text-cypress-700 hover:bg-brass-100/40"
-                >
-                  {link.label} →
-                </Link>
-              ))}
+              {message.item.relatedLinks.map((link) => {
+                const linkClassName =
+                  "rounded-full border border-brass-400/40 px-3 py-1 text-xs font-medium text-cypress-700 hover:bg-brass-100/40";
+                // An external destination (e.g. Argent's application
+                // portal) must never be disguised as an internal page —
+                // real anchor, new tab, and never a Next.js client route.
+                if (link.href.startsWith("http")) {
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={linkClassName}
+                    >
+                      {link.label} ↗
+                    </a>
+                  );
+                }
+                return (
+                  <Link key={link.href} href={link.href} className={linkClassName}>
+                    {link.label} →
+                  </Link>
+                );
+              })}
             </div>
           )}
           {message.item.escalationRequired && <ContactButtonRow />}

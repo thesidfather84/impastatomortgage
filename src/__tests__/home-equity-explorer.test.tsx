@@ -232,6 +232,21 @@ describe("HomeEquityExplorer — mobile / accessibility basics", () => {
   });
 });
 
+describe("HomeEquityExplorer — application handoff", () => {
+  it("offers the real secure application link without implying HECM eligibility, and without gating results", () => {
+    renderExplorer();
+
+    // Results are already visible — the application CTA is additive.
+    expect(screen.getByText("Estimated net principal limit")).toBeInTheDocument();
+    const applyLink = screen.getByRole("link", { name: /start your secure application/i });
+    expect(applyLink).toHaveAttribute("href", "https://argent.my1003app.com/2354629/register");
+    expect(applyLink).toHaveAttribute("target", "_blank");
+    expect(
+      screen.getByText(/not a determination of hecm eligibility/i)
+    ).toBeInTheDocument();
+  });
+});
+
 describe("Reverse Mortgage page — primary discovery point for the Home Equity Explorer", () => {
   it("prominently links to the calculator, high on the page, not just in Resources", () => {
     const { container } = render(<ReverseMortgagePage />);

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useAskDawn } from "@/components/ask-dawn/AskDawnProvider";
 import { CallDawnButton, TextDawnButton } from "@/components/ui/ContactButtons";
+import { ApplicationCta } from "@/components/ui/ApplicationCta";
 import { LiveOak } from "@/components/site/motifs/LiveOak";
 import {
   calculateHecmPreliminaryEstimate,
@@ -221,6 +222,13 @@ export function HomeEquityExplorer() {
                 >
                   Ask Dawn about how a HECM works
                 </button>
+              </div>
+
+              <div className="mt-6 border-t border-cypress-100 pt-5">
+                <ApplicationCta
+                  compact
+                  note="Starting an application is not a determination of HECM eligibility — that's confirmed later in the process, including HUD-approved counseling."
+                />
               </div>
             </div>
           ) : (

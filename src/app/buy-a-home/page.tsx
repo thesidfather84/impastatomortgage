@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/site/PageHeader";
 import { InfoSection } from "@/components/site/InfoSection";
 import { PageCtaBand } from "@/components/site/PageCtaBand";
+import { ApplicationCta } from "@/components/ui/ApplicationCta";
 import { pageMetadata } from "@/config/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -67,6 +68,12 @@ export default function BuyAHomePage() {
             directly.
           </p>
         </InfoSection>
+      </div>
+
+      <div className="mx-auto max-w-3xl px-4 pb-14 sm:px-6 lg:px-8">
+        <div className="rounded-lg border border-brass-400/30 bg-ivory-deep p-6 sm:p-8">
+          <ApplicationCta />
+        </div>
       </div>
 
       <PageCtaBand />

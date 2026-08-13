@@ -55,6 +55,12 @@ reported by `Get-ChildItem` before running `next build`/`next dev`.
   guidance, rates, or eligibility.
 - `src/components/mortgage-compass/` — educational routing wizard, not a
   loan engine. Never add SSN/bank-account collection to it.
+- Argent Lending (`src/config/application.ts`) and ERA Top Agent Realty
+  (`src/config/compliance.ts`, `compliance.realEstate`) are replaceable
+  external affiliations, not fixed to this codebase — Dawn's lender and
+  brokerage relationships can change. Keep application URLs, licensing
+  data, brokerage data, and affiliation-specific disclosures centralized
+  in `src/config/`; never hardcode them across components.
 
 ## Compliance rules (do not relax without the site owner's explicit sign-off)
 

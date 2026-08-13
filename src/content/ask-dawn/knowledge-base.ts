@@ -1,4 +1,5 @@
 import type { KnowledgeItem } from "./types";
+import { ARGENT_APPLICATION_URL } from "@/config/application";
 
 /**
  * PHASE 1 APPROVED KNOWLEDGE BASE
@@ -207,5 +208,26 @@ export const knowledgeBase: KnowledgeItem[] = [
       { label: "Reverse Mortgage overview", href: "/reverse-mortgage" },
       { label: "Home Equity / Options", href: "/home-equity" },
     ],
+  },
+  {
+    id: "how-to-apply",
+    questionVariants: [
+      "i want to apply",
+      "start application",
+      "ready to apply",
+      "how do i apply",
+      "loan application",
+      "apply for a mortgage",
+      "how do i start my application",
+    ],
+    approvedAnswer:
+      "When you're ready, applications are completed through Dawn's secure Argent Lending application portal — never on this website. It's the safe, official way to start, and Dawn can walk you through it directly if you have questions along the way.",
+    topic: "Application",
+    reviewDate: null,
+    approved: true,
+    complianceNotes:
+      "Points to the verified Argent Lending application portal only — this site never collects application data (SSN, bank information, income documents, credit information) itself.",
+    escalationRequired: false,
+    relatedLinks: [{ label: "Start Your Secure Application", href: ARGENT_APPLICATION_URL }],
   },
 ];

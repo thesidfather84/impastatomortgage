@@ -7,6 +7,7 @@ import { knowledgeBase } from "@/content/ask-dawn/knowledge-base";
 import { poolOptions } from "@/content/ask-dawn/personality";
 import { louisianaTrivia } from "@/content/ask-dawn/louisiana-trivia";
 import { LAGNIAPPE_TRIGGER_TEXT } from "@/lib/ask-dawn/trivia";
+import { ARGENT_APPLICATION_URL } from "@/config/application";
 
 function escapeRegex(text: string): string {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -218,5 +219,38 @@ describe("AskDawnProvider", () => {
 
     const expected = knowledgeBase.find((k) => k.id === "what-is-fha")!;
     expect(screen.getByText(expected.approvedAnswer)).toBeInTheDocument();
+  });
+
+  it.each([
+    "I want to apply",
+    "start application",
+    "ready to apply",
+    "how do I apply",
+    "loan application",
+  ])('routes "%s" to the real secure application link, professionally, not the generic escalation', async (phrase) => {
+    const user = userEvent.setup();
+    render(
+      <AskDawnProvider>
+        <TestHarness />
+      </AskDawnProvider>
+    );
+
+    await user.type(screen.getByLabelText("custom question"), phrase);
+    await user.click(screen.getByText("Ask custom"));
+
+    const expected = knowledgeBase.find((k) => k.id === "how-to-apply")!;
+    // Routed to the real approved answer, not the generic "unknown" escalation pool.
+    expect(screen.getByText(expected.approvedAnswer)).toBeInTheDocument();
+    expect(screen.queryByText(anyOf(poolOptions("unknown")))).not.toBeInTheDocument();
+
+    // The KB entry backing this answer points at the real, verified secure
+    // application portal. (TestHarness renders text only, not the
+    // AskDawnMessageBubble that turns relatedLinks into an <a> — the actual
+    // rendered link's href/target/rel is covered by
+    // ask-dawn-message-bubble.test.tsx.)
+    expect(expected.relatedLinks).toContainEqual({
+      label: "Start Your Secure Application",
+      href: ARGENT_APPLICATION_URL,
+    });
   });
 });

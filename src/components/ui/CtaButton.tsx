@@ -33,6 +33,8 @@ type CtaButtonProps = {
   size?: Size;
   icon?: ReactNode;
   className?: string;
+  /** Opens in a new tab with rel="noopener noreferrer" — only meaningful for a real http(s) href, never for tel:/sms:/mailto:. Use for handoffs to an external partner system where the visitor should keep their place on this site. */
+  newTab?: boolean;
 };
 
 /**
@@ -46,8 +48,10 @@ export function CtaButton({
   size = "md",
   icon,
   className,
+  newTab,
 }: CtaButtonProps) {
   const isSpecialProtocol = /^(tel:|sms:|mailto:)/.test(href);
+  const isExternalHttp = href.startsWith("http");
   const classes = cn(
     "inline-flex min-h-[44px] items-center justify-center gap-2 rounded-md font-semibold tracking-wide transition-colors focus-visible:outline-offset-4",
     VARIANT_CLASSES[variant],
@@ -55,9 +59,13 @@ export function CtaButton({
     className
   );
 
-  if (isSpecialProtocol || href.startsWith("http")) {
+  if (isSpecialProtocol || isExternalHttp) {
     return (
-      <a href={href} className={classes}>
+      <a
+        href={href}
+        className={classes}
+        {...(newTab && isExternalHttp ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
         {icon}
         {children}
       </a>

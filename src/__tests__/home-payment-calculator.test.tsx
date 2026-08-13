@@ -148,4 +148,15 @@ describe("HomePaymentCalculator", () => {
       expect.stringContaining("sms:")
     );
   });
+
+  it("offers a secondary, secure application CTA beneath the results, without gating the results behind it", () => {
+    renderCalculator();
+
+    // Results are already visible (asserted in the first test) — the
+    // application CTA is an addition, never a requirement to see them.
+    expect(screen.getByText("Estimated monthly payment")).toBeInTheDocument();
+    const applyLink = screen.getByRole("link", { name: /start your secure application/i });
+    expect(applyLink).toHaveAttribute("href", "https://argent.my1003app.com/2354629/register");
+    expect(applyLink).toHaveAttribute("target", "_blank");
+  });
 });

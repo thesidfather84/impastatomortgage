@@ -5,6 +5,7 @@ import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { useAskDawn } from "@/components/ask-dawn/AskDawnProvider";
 import { CallDawnButton, TextDawnButton } from "@/components/ui/ContactButtons";
+import { ApplicationCta } from "@/components/ui/ApplicationCta";
 import {
   calculateHomePayment,
   downPaymentDollarsToPercent,
@@ -344,6 +345,10 @@ export function HomePaymentCalculator() {
                 >
                   Ask Dawn about these numbers
                 </button>
+              </div>
+
+              <div className="mt-6 border-t border-cypress-100 pt-5">
+                <ApplicationCta compact />
               </div>
             </>
           ) : (
