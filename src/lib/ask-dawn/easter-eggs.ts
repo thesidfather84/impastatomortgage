@@ -22,6 +22,13 @@ export function matchEasterEgg(query: string, eggs: EasterEgg[]): EasterEgg | nu
       const overlap = [...triggerTokens].filter((t) => queryTokens.has(t)).length;
       if (overlap < triggerTokens.size) continue;
 
+      // A trigger that collapses to a single common word after stopword
+      // stripping (e.g. "are you italian" -> just "italian") must not
+      // hijack a much longer, differently-intended query — otherwise a
+      // request like "Italian Louisiana history" would get swallowed by
+      // this joke instead of reaching real trivia content.
+      if (triggerTokens.size <= 1 && queryTokens.size > triggerTokens.size + 1) continue;
+
       const score = overlap / triggerTokens.size;
       if (!best || score > best.score) best = { egg, score };
     }

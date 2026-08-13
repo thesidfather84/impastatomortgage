@@ -34,6 +34,15 @@ export function ResourcesDropdown() {
       className="relative"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+      onBlur={(event) => {
+        // Only close once focus leaves the trigger AND the panel — a Tab
+        // press between menu links fires blur/focus in the same tick, so
+        // this must check where focus is *going*, not just that it left.
+        if (!wrapperRef.current?.contains(event.relatedTarget as Node)) {
+          setOpen(false);
+        }
+      }}
     >
       <button
         type="button"
@@ -49,24 +58,33 @@ export function ResourcesDropdown() {
       </button>
 
       {open && (
-        <div
-          role="menu"
-          className="absolute left-1/2 top-full z-40 mt-3 w-72 -translate-x-1/2 rounded-lg border border-brass-400/30 bg-ivory p-2 shadow-xl"
-        >
-          {resourcesNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              role="menuitem"
-              onClick={() => setOpen(false)}
-              className="block rounded-md px-3 py-2.5 text-cypress-900 hover:bg-cypress-50"
-            >
-              <span className="block text-sm font-semibold">{item.label}</span>
-              {item.description && (
-                <span className="block text-xs text-cypress-700">{item.description}</span>
-              )}
-            </Link>
-          ))}
+        // No margin between the trigger and this wrapper — a margin-created
+        // gap isn't part of either element's hit-box, so the pointer can
+        // cross it while briefly hovering nothing, which fires mouseleave
+        // and closes the menu before the cursor ever reaches it. The visual
+        // gap instead lives as *padding* inside this box, so it's part of
+        // one continuous hoverable region from the trigger down through the
+        // menu card.
+        <div className="absolute left-1/2 top-full z-40 w-72 -translate-x-1/2 pt-3">
+          <div
+            role="menu"
+            className="rounded-lg border border-brass-400/30 bg-ivory p-2 shadow-xl"
+          >
+            {resourcesNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                role="menuitem"
+                onClick={() => setOpen(false)}
+                className="block rounded-md px-3 py-2.5 text-cypress-900 hover:bg-cypress-50"
+              >
+                <span className="block text-sm font-semibold">{item.label}</span>
+                {item.description && (
+                  <span className="block text-xs text-cypress-700">{item.description}</span>
+                )}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -26,6 +26,16 @@ export function PublicLicenseSummary({ className }: { className?: string }) {
     <div className={className}>
       {originatorLine && <p>{originatorLine}</p>}
       {companyLine && <p>{companyLine}</p>}
+      <p>
+        <a
+          href="https://www.nmlsconsumeraccess.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline underline-offset-2 hover:text-burgundy-600"
+        >
+          NMLS Consumer Access
+        </a>
+      </p>
     </div>
   );
 }

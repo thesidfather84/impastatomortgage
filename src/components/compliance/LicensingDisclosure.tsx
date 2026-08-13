@@ -43,6 +43,16 @@ export function LicensingDisclosure({ className }: { className?: string }) {
             {mortgageLines.map((line) => (
               <p key={line}>{line}</p>
             ))}
+            <p>
+              <a
+                href="https://www.nmlsconsumeraccess.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-burgundy-600"
+              >
+                Verify on NMLS Consumer Access
+              </a>
+            </p>
           </div>
         </div>
       )}

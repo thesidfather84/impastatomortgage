@@ -45,6 +45,7 @@ export const fullNav: NavItem[] = [
 
 export const footerNav: NavItem[] = [
   ...fullNav,
+  { label: "Legal Information", href: "/legal" },
   { label: "Privacy Policy", href: "/privacy-policy" },
   { label: "Terms of Use", href: "/terms" },
   { label: "Accessibility Statement", href: "/accessibility-statement" },

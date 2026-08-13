@@ -38,6 +38,14 @@ export default function PrivacyPolicyPage() {
               bank account or routing numbers, or credit report information.
             </li>
             <li>No contact form is connected to a backend yet.</li>
+            <li>
+              Because no form on this site currently collects your phone
+              number, email address, or other contact information, there is
+              no marketing consent language to show you today. Before any
+              contact form is connected, this page will be updated with
+              clear consent language covering calls, texts, and emails —
+              including how to opt out.
+            </li>
           </ul>
         </InfoSection>
 

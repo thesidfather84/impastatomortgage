@@ -67,6 +67,52 @@ export const compliance = {
   /**
    * Dawn's Louisiana real-estate license — separate from, and not to be
    * implied as affiliated with, her mortgage relationship above.
+   *
+   * LREC ADVERTISING SCAFFOLDING (added after the 2026-08 LREC audit):
+   * ---------------------------------------------------------------------
+   * The four `sponsoringBroker*` fields below exist because the Louisiana
+   * Real Estate Commission's CURRENT "Advertising Guidelines Checklist"
+   * (published at lrec.gov/enforcement/advertising-guidelines, citing LAC
+   * Title 46:LXVII Chapter 25, §2515 and §2501(F)) requires that an
+   * associate broker/salesperson's own website show, on EVERY page:
+   *   - the associate broker's name (already covered: licenseeLegalName)
+   *   - the broker/trade name exactly as listed on the licensee's license
+   *   - the city and state of the broker's main or branch office
+   *   - the regulatory jurisdiction(s) in which the broker holds a license
+   * and (via §2501(F), applied to internet advertising by LREC's own
+   * guidance) a phone number owned by the brokerage itself that reaches
+   * the broker directly — not a line that routes through Dawn.
+   *
+   * None of these values are currently known to this codebase. Per the
+   * audit, they must come from Dawn or her sponsoring broker directly —
+   * never scraped from an old profile, business listing, or search
+   * result, since a wrong broker phone/address is worse than a missing
+   * one. Leave every one of these `todo` until a human confirms it.
+   *
+   * `sponsoringBrokerFranchiseStatus` is separate: §2509 requires an
+   * "independently owned and operated" disclosure only if the sponsoring
+   * brokerage is affiliated with a franchise organization. We don't know
+   * whether Celestino Investment Group LLC is a franchise, so this is
+   * tracked as its own pending fact rather than assumed either way.
+   *
+   * THRESHOLD QUESTION (also unresolved, and not a `ComplianceField` since
+   * it isn't a fact to fill in — it's a judgment call):
+   * TODO: Does ImpastatoMortgage.com constitute Louisiana real-estate
+   * advertising under Chapter 25 merely because it promotes Dawn's
+   * real-estate experience as a mortgage-business differentiator (see
+   * `realEstateExperienceStatement` below and `brand.experienceHeadline`)?
+   * If yes, every page of this site would need the four items above. If
+   * no, the existing /licensing-disclosures-only treatment may remain
+   * sufficient. This requires confirmation from Dawn's sponsoring broker,
+   * LREC, or qualified legal/compliance counsel — it is explicitly NOT
+   * something to infer or guess from the rule text alone.
+   *
+   * FUTURE DESIGN NOTE, once/if the above is confirmed to require
+   * every-page display: per site design direction, that disclosure
+   * belongs in the existing site footer (ComplianceFooter) as a compact,
+   * quiet addition next to the mortgage NMLS summary — never as a hero
+   * overlay, popup, nav item, or repeated in-page warning block. Until
+   * then, none of these fields should be wired into any public component.
    */
   realEstate: {
     licenseeLegalName: confirmed("Dawn Bullard Impastato"),
@@ -81,6 +127,14 @@ export const compliance = {
      * separately verified.
      */
     supervisingBrokerage: confirmed("Celestino Investment Group LLC"),
+    /** LREC §2501(F)/§2515: a brokerage-owned phone number, not Dawn's. */
+    sponsoringBrokerPhone: todo<string>(),
+    /** LREC §2515: city and state of the broker's main or branch office. */
+    sponsoringBrokerCityState: todo<string>(),
+    /** LREC §2515: the regulatory jurisdiction(s) the broker is licensed in. */
+    sponsoringBrokerJurisdiction: todo<string>(),
+    /** LREC §2509: whether the sponsoring brokerage is a franchise (triggers "independently owned and operated" disclosure). */
+    sponsoringBrokerFranchiseStatus: todo<boolean>(),
   },
 
   /** Required state-specific advertising/disclosure language. */

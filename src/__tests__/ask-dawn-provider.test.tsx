@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { describe, expect, it, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -5,6 +6,7 @@ import { AskDawnProvider, useAskDawn } from "@/components/ask-dawn/AskDawnProvid
 import { knowledgeBase } from "@/content/ask-dawn/knowledge-base";
 import { poolOptions } from "@/content/ask-dawn/personality";
 import { louisianaTrivia } from "@/content/ask-dawn/louisiana-trivia";
+import { LAGNIAPPE_TRIGGER_TEXT } from "@/lib/ask-dawn/trivia";
 
 function escapeRegex(text: string): string {
   return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -17,6 +19,7 @@ function anyOf(pool: string[]): RegExp {
 
 function TestHarness() {
   const { messages, askQuestion } = useAskDawn();
+  const [customText, setCustomText] = useState("");
   return (
     <div>
       <button onClick={() => askQuestion("What is a reverse mortgage?")}>
@@ -31,6 +34,21 @@ function TestHarness() {
       </button>
       <button onClick={() => askQuestion("are you italian")}>Ask easter egg question</button>
       <button onClick={() => askQuestion("give me some lagniappe")}>Ask for lagniappe</button>
+      <button onClick={() => askQuestion(LAGNIAPPE_TRIGGER_TEXT)}>Random Louisiana fact chip</button>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          askQuestion(customText);
+        }}
+      >
+        <label htmlFor="custom-question">custom question</label>
+        <input
+          id="custom-question"
+          value={customText}
+          onChange={(e) => setCustomText(e.target.value)}
+        />
+        <button type="submit">Ask custom</button>
+      </form>
       <ul>
         {messages.map((m) => (
           <li key={m.id} data-role={m.role} data-kind={"kind" in m ? m.kind : undefined}>
@@ -148,5 +166,57 @@ describe("AskDawnProvider", () => {
     expect(
       screen.getByText(anyOf(louisianaTrivia.map((f) => f.fact)))
     ).toBeInTheDocument();
+  });
+
+  it("the persistent 'Random Louisiana fact' chip returns trivia in one tap", async () => {
+    const user = userEvent.setup();
+    render(
+      <AskDawnProvider>
+        <TestHarness />
+      </AskDawnProvider>
+    );
+
+    await user.click(screen.getByText("Random Louisiana fact chip"));
+
+    expect(
+      screen.getByText(anyOf(louisianaTrivia.map((f) => f.fact)))
+    ).toBeInTheDocument();
+  });
+
+  it.each([
+    "tell me some trivia",
+    "Louisiana trivia",
+    "New Orleans trivia",
+    "Italian Louisiana history",
+    "tell me something interesting",
+    "another fact",
+  ])('routes "%s" to trivia instead of the generic escalation', async (phrase) => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <AskDawnProvider>
+        <TestHarness />
+      </AskDawnProvider>
+    );
+
+    await user.type(screen.getByLabelText("custom question"), phrase);
+    await user.click(screen.getByText("Ask custom"));
+
+    const items = container.querySelectorAll("li[data-role='assistant']");
+    const last = items[items.length - 1];
+    expect(last.getAttribute("data-kind")).toBe("trivia");
+  });
+
+  it("a normal mortgage question is never swallowed by the broadened trivia routing", async () => {
+    const user = userEvent.setup();
+    render(
+      <AskDawnProvider>
+        <TestHarness />
+      </AskDawnProvider>
+    );
+
+    await user.click(screen.getByText("Ask jargon question"));
+
+    const expected = knowledgeBase.find((k) => k.id === "what-is-fha")!;
+    expect(screen.getByText(expected.approvedAnswer)).toBeInTheDocument();
   });
 });

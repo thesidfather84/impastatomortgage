@@ -5,6 +5,7 @@ import { useAskDawn } from "./AskDawnProvider";
 import { AskDawnMessageBubble } from "./AskDawnMessageBubble";
 import { VoiceInputButton } from "./VoiceInputButton";
 import { DawnMonogram } from "./DawnMonogram";
+import { LAGNIAPPE_TRIGGER_TEXT } from "@/lib/ask-dawn/trivia";
 
 const EXAMPLE_QUESTIONS = [
   "What is a reverse mortgage?",
@@ -76,7 +77,7 @@ export function AskDawnPanel() {
           <p className="text-sm italic text-cypress-700">Ask a question to get started.</p>
         )}
         {messages.map((message) => (
-          <AskDawnMessageBubble key={message.id} message={message} />
+          <AskDawnMessageBubble key={message.id} message={message} onAskQuestion={askQuestion} />
         ))}
 
         {messages.length <= 1 && (
@@ -95,7 +96,22 @@ export function AskDawnPanel() {
         )}
       </div>
 
-      <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t border-cypress-100 p-3">
+      <p className="border-t border-cypress-100 px-3 pt-2 text-center text-[11px] leading-snug text-cypress-600">
+        General info only — not a loan approval or live rates. Talk with
+        Dawn about your specific situation.
+      </p>
+
+      <div className="px-3 pt-2">
+        <button
+          type="button"
+          onClick={() => askQuestion(LAGNIAPPE_TRIGGER_TEXT)}
+          className="flex min-h-[40px] w-full items-center justify-center gap-1.5 rounded-full border border-brass-400/50 bg-brass-100/40 px-4 text-sm font-medium text-cypress-700 hover:bg-brass-100"
+        >
+          🎲 Random Louisiana fact
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex items-center gap-2 p-3">
         <VoiceInputButton />
         <label htmlFor="ask-dawn-input" className="sr-only">
           Type your question

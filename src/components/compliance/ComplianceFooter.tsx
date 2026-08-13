@@ -93,6 +93,9 @@ export function ComplianceFooter() {
               <Link href="/licensing-disclosures" className="underline underline-offset-2 hover:text-burgundy-600">
                 Licensing &amp; Disclosures
               </Link>
+              <Link href="/legal" className="underline underline-offset-2 hover:text-burgundy-600">
+                Legal
+              </Link>
               <Link href="/privacy-policy" className="underline underline-offset-2 hover:text-burgundy-600">
                 Privacy
               </Link>
@@ -111,7 +114,7 @@ export function ComplianceFooter() {
           </p>
 
           <p className="mt-3 text-sm text-cypress-700/60">
-            &copy; {year} {brand.siteName}
+            &copy; {year} {brand.siteName}. All rights reserved.
           </p>
         </div>
       </div>

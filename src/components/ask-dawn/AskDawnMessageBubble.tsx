@@ -1,9 +1,17 @@
 import Link from "next/link";
 import { ContactButtonRow } from "@/components/ui/ContactButtons";
 import { DawnMonogram } from "./DawnMonogram";
+import { LAGNIAPPE_TRIGGER_TEXT } from "@/lib/ask-dawn/trivia";
 import type { ConversationMessage } from "./AskDawnProvider";
 
-export function AskDawnMessageBubble({ message }: { message: ConversationMessage }) {
+export function AskDawnMessageBubble({
+  message,
+  onAskQuestion,
+}: {
+  message: ConversationMessage;
+  /** Only needed to power the "want another?" trivia follow-up chip. */
+  onAskQuestion?: (question: string) => void;
+}) {
   if (message.role === "user") {
     return (
       <div className="flex justify-end">
@@ -50,8 +58,14 @@ export function AskDawnMessageBubble({ message }: { message: ConversationMessage
               </a>
             </p>
           </div>
-          {message.more && (
-            <p className="text-xs italic text-cypress-700">{message.more}</p>
+          {message.more && onAskQuestion && (
+            <button
+              type="button"
+              onClick={() => onAskQuestion(LAGNIAPPE_TRIGGER_TEXT)}
+              className="min-h-[36px] w-fit rounded-full border border-brass-400/50 bg-brass-100/40 px-3 py-1.5 text-xs font-medium italic text-cypress-700 hover:bg-brass-100"
+            >
+              {message.more}
+            </button>
           )}
         </div>
       </div>

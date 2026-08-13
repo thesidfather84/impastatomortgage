@@ -6,6 +6,7 @@ import { AskDawnMessageBubble } from "./AskDawnMessageBubble";
 import { VoiceInputButton } from "./VoiceInputButton";
 import { DawnMonogram } from "./DawnMonogram";
 import { poolOptions } from "@/content/ask-dawn/personality";
+import { LAGNIAPPE_TRIGGER_TEXT } from "@/lib/ask-dawn/trivia";
 
 // A single fixed line (not randomized) so server and client render the
 // same idle placeholder with no hydration mismatch.
@@ -54,7 +55,7 @@ export function AskDawnInline() {
           <p className="text-sm italic text-cypress-700">{IDLE_GREETING}</p>
         )}
         {messages.map((message) => (
-          <AskDawnMessageBubble key={message.id} message={message} />
+          <AskDawnMessageBubble key={message.id} message={message} onAskQuestion={askQuestion} />
         ))}
 
         <div className="flex flex-wrap gap-2 pt-2">
@@ -71,7 +72,22 @@ export function AskDawnInline() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex items-center gap-2 border-t border-cypress-100 p-4">
+      <p className="border-t border-cypress-100 px-5 pt-3 text-center text-xs leading-snug text-cypress-600">
+        General info only — not a loan approval or live rates. Talk with
+        Dawn about your specific situation.
+      </p>
+
+      <div className="px-5 pt-3">
+        <button
+          type="button"
+          onClick={() => askQuestion(LAGNIAPPE_TRIGGER_TEXT)}
+          className="flex min-h-[44px] w-full items-center justify-center gap-1.5 rounded-full border border-brass-400/50 bg-brass-100/40 px-4 text-sm font-medium text-cypress-700 hover:bg-brass-100"
+        >
+          🎲 Random Louisiana fact
+        </button>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex items-center gap-2 p-4">
         <VoiceInputButton />
         <label htmlFor="ask-dawn-inline-input" className="sr-only">
           Type your question

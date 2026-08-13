@@ -24,20 +24,41 @@ export function matchTriviaTrigger(query: string, facts: TriviaFact[]): TriviaFa
   return best ? best.fact : null;
 }
 
+/** The exact text the "Random Louisiana fact" chip sends as the user's message. */
+export const LAGNIAPPE_TRIGGER_TEXT = "🎲 Random Louisiana fact";
+
+// Broad, low-collision substrings — none of these words appear in any
+// mortgage knowledge-base question, so matching them anywhere in the
+// query is safe. "trivia" alone covers every "___ trivia" phrasing
+// ("louisiana trivia", "new orleans trivia", "give me trivia", ...).
 const LAGNIAPPE_PHRASES = [
   "lagniappe",
-  "give me trivia",
-  "louisiana trivia",
-  "new orleans trivia",
-  "italian trivia",
+  "trivia",
+  "give me a fact",
+  "another fact",
+  "fun fact",
+  "random fact",
+  "louisiana fact",
   "something weird about louisiana",
-  "give me some lagniappe",
+  "louisiana history",
+  "italian history",
+  "sicilian history",
+];
+
+// Generic phrasings with no Louisiana/Italian keyword of their own — only
+// safe as a *whole-query* match (not a substring) so a real question like
+// "tell me something about FHA" is never swallowed.
+const EXACT_TRIVIA_PHRASES = [
+  "tell me something interesting",
+  "something interesting",
+  "surprise me",
 ];
 
 /** Explicit "surprise me" request — always returns a random fact. */
 export function isLagniappeRequest(query: string): boolean {
-  const q = query.toLowerCase();
-  return LAGNIAPPE_PHRASES.some((p) => q.includes(p));
+  const q = query.toLowerCase().trim();
+  if (LAGNIAPPE_PHRASES.some((p) => q.includes(p))) return true;
+  return EXACT_TRIVIA_PHRASES.includes(q);
 }
 
 const TRIVIA_INTENT_HINTS = [
@@ -48,7 +69,7 @@ const TRIVIA_INTENT_HINTS = [
   "why does",
   "what's a",
   "whats a",
-  "history of",
+  "history",
   "trivia",
 ];
 
